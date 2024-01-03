@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+   <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
+   <title>UTicket - Головна</title>
+</head>
+
+<body>
+   <!-- ============  HEADER  ============== -->
+   <header class="header">
+      <div class="header__container flex">
+         <div class="header__logo">
+         <a href="index.html">
+            <img src="static/imgs/logo.svg" alt="">
+         </a>
+         </div>
+         <nav class="header__menu">
+            <i class="ri-menu-line menu__icon open-menu" id="open-menu"></i>
+            <ul class="menu__list flex" id="menu">
+               <div class="menu__close__container flex" >
+                  <div class="menu__close menu__icon" id="close-menu">
+                     <i class="ri-close-line"></i>
+                  </div>
+               </div>
+               <li class="menu__item">
+                  <button href="" class="menu__link input__container" id="login-trigger">Увійти</button>
+               </li>
+               <li class="menu__item">
+                  <button class="menu__link input__container" id="signup-trigger">Зареєструватися</button>
+                  <!-- <ul class="menu__sublist" id="header-sublist">
+                     <li class="sublist__item">
+                        <button href="" class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
+                     </li>
+                     <li class="sublist__item">
+                        <button href="" class="menu__sublink" id="logout-trigger">Вийти</button>
+                     </li>
+                  </ul> -->
+               </li>
+            </ul>
+         </nav>
+      </div>
+   </header>
+
+   <!-- ============  MAIN  ============== -->
+   <main class="main">
+      <div class="wrapper">
+         <!-- ============  HOME  ============== -->
+         <section class="home section">
+            <div class="home__container">
+               <div class="home__cards grid grid-template-columns-3">
+                  <div class="home__card flex">
+                     <i class="ri-calendar-check-line home__icon"></i>
+                     <a href="booking.html" class="home__button button-fill button-green">Забронювати</a>
+                  </div>
+                  <div class="home__card flex">
+                     <i class="ri-ticket-2-line home__icon"></i>
+                     <a href="./check-boocking.html" class="home__button button-fill button-blue">Подивитися білет</a>
+                  </div>
+                  <div class="home__card flex">
+                     <i class="ri-calendar-close-line home__icon"></i>
+                     <a href="./cancel-booking.html" class="home__button button-fill button-red">Скасувати</a>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </div>
+   </main>
+
+   <!-- ============  FOOTER  ============== -->
+   <footer class="footer">
+      <div class="wrapper">
+         <div class="footer__container">
+            <nav class="footer__data grid grid-template-columns-3">
+               <ul class="footer__links">
+                  <h3 class="list__title">Компанія</h3>
+                  <li>
+                     <a href="" class="footer__link">Про нас</a>
+                  </li>
+               </ul>
+            </nav>
+
+            <form action="" class="footer__form">
+               <h3 class="list__title">Маєте питання?</h3>
+               <div class="footer__form__fields grid grid-template-columns-3">
+                  <div class="form__field">
+                     <p class="field__title">Ваш email</p>
+                     <input type="text" class="input__container form__input" placeholder="someone@example.com">
+                  </div>
+                  <div class="form__field">
+                     <p class="field__title">Питання</p>
+                     <input type="text" class="input__container form__input" placeholder="Мене цікавить...">
+                  </div>
+                  <div class="form__field footer__submit">
+                     <input type="submit" class=" input__container button-fill button-black form__button" value="Відправити">
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </footer>
+
+   <!-- ============  SIGNUP FORM  ============== -->
+   <div class="pop-up__log-form" id="signup-form">
+   
+      <div class="background-darken"></div>
+   
+      <div class="log-form__container">
+         <div class="log-form__close__container flex">
+            <div class="log-form__close" id="close-form">
+               <i class="ri-close-line"></i>
+            </div>
+         </div>
+   
+         <h1 class="log-form__title">Зареєструватися</h1>
+   
+         <form action="#" class="log-form__form flex" method="post">
+            <div class="log-form__field">
+               <p class="field-title">Ваше ім’я</p>
+               <input type="text" class="log-form__input input__container" placeholder="Ім’я" required>
+            </div>
+            <div class="log-form__field">
+               <p class="field-title">Ваше прізвище</p>
+               <input type="text" class="log-form__input input__container" placeholder="Прізвище" required>
+            </div>
+            <div class="log-form__field">
+               <p class="field-title">Ваш email</p>
+               <input type="email" class="log-form__input input__container" placeholder="Email" required>
+            </div>
+            <div class="log-form__field">
+               <p class="field-title">Пароль</p>
+               <div class="log-form__input-with-icon">
+                  <input type="password" class="log-form__input input__container input-password" id="input-password"
+                     placeholder="Створіть пароль" required>
+                  <span class="input__icon" id="show-hide-password">
+                     <i class="ri-eye-fill eye-opened hidden"></i>
+                     <i class="ri-eye-off-fill eye-closed"></i>
+                  </span>
+               </div>
+            </div>
+            <div class="log-form__field">
+               <p class="field-title">Дата народженя</p>
+               <div class="log-form__input-with-icon">
+                  <input type="date" class="log-form__input input__container input-date" id="date-of-birth" required min="1900-12-31">
+               </div>
+            </div>
+            <div class="log-form__field">
+               <button class="log-form__submit button-fill button-blue" type="submit">
+                  Продовжити
+               </button>
+            </div>
+         </form>
+         <p class="log-form__subtext">
+            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
+         </p>
+      </div>
+   </div>
+
+   <!-- ============  LOGIN FORM  ============== -->
+   <div class="pop-up__log-form" id="login-form">
+   
+      <div class="background-darken"></div>
+   
+      <div class="log-form__container">
+         <div class="log-form__close__container flex">
+            <div class="log-form__close" id="close-form">
+               <i class="ri-close-line"></i>
+            </div>
+         </div>
+   
+         <h1 class="log-form__title">Увійти</h1>
+   
+         <form action="#" class="log-form__form flex" method="post">
+            <div class="log-form__field">
+               <p class="field-title">Ваш email</p>
+               <input type="email" class="log-form__input input__container" placeholder="Email" required>
+            </div>
+            <div class="log-form__field">
+               <p class="field-title">Пароль</p>
+               <div class="log-form__input-with-icon">
+                  <input type="password" class="log-form__input input__container input-password" id="input-password"
+                     placeholder="Введіть пароль" required>
+                  <span class="input__icon" id="show-hide-password">
+                     <i class="ri-eye-fill eye-opened hidden"></i>
+                     <i class="ri-eye-off-fill eye-closed"></i>
+                  </span>
+               </div>
+            </div>
+            <div class="log-form__field">
+               <button class="log-form__submit button-fill button-blue" type="submit">
+                  Увійти
+               </button>
+            </div>
+         </form>
+         <p class="log-form__subtext">
+            Ще не маєте облікового запису? <span onclick="openPopupSignup()" style="cursor: pointer;" class="subtext__link" id="to-login">Зареєструватися</span>
+         </p>
+      </div>
+   </div>
+
+   <!-- scripts -->
+   <script src="static/js/main.js"></script>
+</body>
+
+</html>
