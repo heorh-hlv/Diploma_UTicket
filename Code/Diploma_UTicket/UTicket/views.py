@@ -8,7 +8,7 @@ def booking_page(request):
     return render(request, 'booking.html')
 
 def cancel_page(request):
-    return render(request, 'cancel-booking.html')
+    return render(request, 'cancel_booking.html')
 
 def check_page(request):
-    return render(request, 'check-booking.html')
+    return render(request, 'check_booking.html')

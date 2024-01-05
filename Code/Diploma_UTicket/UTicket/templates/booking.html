@@ -4,10 +4,10 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="assets/css/styles.css">
+   <link rel="stylesheet" href="static/css/styles.css">
    <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-   <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
+   <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
    <title>UTicket - Головна</title>
 </head>
 
@@ -16,8 +16,8 @@
    <header class="header">
       <div class="header__container flex">
          <div class="header__logo">
-            <a href="index.html">
-               <img src="assets/imgs/logo.svg" alt="">
+            <a href="{% url 'home' %}">
+               <img src="static/imgs/logo.svg" alt="">
             </a>
          </div>
          <nav class="header__menu">
@@ -54,6 +54,7 @@
          <!-- ============  BOOKING  ============== -->
          <section class="booking section">
             <form action="" class="booking__form form">
+               {% csrf_token %}
                <!-- Travel details chapter -->
                <div class="form-chapter">
                   <h1 class="chapter__title">
@@ -64,7 +65,7 @@
                         <p class="field-title">Місто відправлення*</p>
                         <div class="chapter__input wrapper-dropdown input__container">
                            <input type="text" class="hidden" id="city-of-departure">
-                            <span class="selected-display" id="destination">Не обрано</span>
+                            <span class="selected-display">Не обрано</span>
                            <i class="ri-arrow-down-s-fill arrow"></i>
                            <ul class="dropdown">
                               <li class="dropdown-item">Київ</li>
@@ -73,7 +74,7 @@
                               <li class="dropdown-item">Львів</li>
                            </ul>
                         </div>
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Місто призначення*</p>
@@ -88,7 +89,7 @@
                               <li class="dropdown-item">Львів</li>
                            </ul>
                         </div>
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Дата відправлення*</p>
@@ -96,7 +97,7 @@
                            <input type="date" class="chapter__input input__container input-date" id="departure-date" 
                               min="1900-12-31">
                         </div>
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Дата повернення</p>
@@ -111,7 +112,7 @@
                            <input type="text" class="chapter__input input__container" id="amount-of-passengers" 
                               min="1" max="10" value="1">
                         </div>
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                   </div>
                </div>
@@ -126,7 +127,7 @@
                         <p class="field-title">Клас</p>
                         <div class="chapter__input wrapper-dropdown input__container">
                            <input type="text" class="hidden" id="plane-class">
-                            <span class="selected-display" id="destination">Не обрано</span>
+                            <span class="selected-display">Не обрано</span>
                            <i class="ri-arrow-down-s-fill arrow"></i>
                            <ul class="dropdown">
                               <li class="dropdown-item">Стандарт</li>
@@ -139,7 +140,7 @@
                         <p class="field-title">Рейс відправлення</p>
                         <div class="chapter__input wrapper-dropdown input__container">
                            <input type="text" class="hidden" id="flight-departure">
-                            <span class="selected-display" id="destination">Не обрано</span>
+                            <span class="selected-display">Не обрано</span>
                            <i class="ri-arrow-down-s-fill arrow"></i>
                            <ul class="dropdown">
                               <li class="dropdown-item">18:00</li>
@@ -152,7 +153,7 @@
                         <p class="field-title">Місце</p>
                         <div class="chapter__input wrapper-dropdown input__container">
                            <input type="text" class="hidden" id="plane-place">
-                           <span class="selected-display" id="destination">Не обрано</span>
+                           <span class="selected-display">Не обрано</span>
                            <i class="ri-arrow-down-s-fill arrow"></i>
                            <ul class="dropdown">
                               <li class="dropdown-item">У вікна</li>
@@ -174,29 +175,29 @@
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field__title">Ваше ім’я*</p>
                         <input type="text" class="chapter__input input__container " placeholder="Шм'я">
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Ваше прізвище*</p>
                         <input type="text" class="chapter__input input__container" placeholder="Прізвище" >
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Дата народженя*</p>
                         <div class="log-form__input-with-icon">
                            <input type="date" class="chapter__input input__container input-date input-birthday" id="date-of-birth">
                         </div>
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Тел. номер*</p>
                         <input type="tel" class="chapter__input input__container" placeholder="+380 95 159 45 68" pattern="(\+380|0)[0-9]{9}">
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                      <div class="chapter__field grid-field" tabindex="-1">
                         <p class="field-title">Ваш email*</p>
                         <input type="email" class="chapter__input input__container" placeholder="Email" >
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
+                        <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                      </div>
                   </div>
                </div>
@@ -223,6 +224,7 @@
             </nav>
 
             <form action="" class="footer__form">
+               {% csrf_token %}
                <h3 class="list__title">Маєте питання?</h3>
                <div class="footer__form__fields grid grid-template-columns-3">
                   <div class="form__field">
@@ -258,6 +260,7 @@
          <h1 class="log-form__title">Зареєструватися</h1>
 
          <form action="#" class="log-form__form flex" method="post">
+            {% csrf_token %}
             <div class="log-form__field">
                <p class="field-title">Ваше ім’я</p>
                <input type="text" class="log-form__input input__container" placeholder="Ім’я" >
@@ -275,7 +278,7 @@
                <div class="log-form__input-with-icon">
                   <input type="password" class="log-form__input input__container input-password" id="input-password"
                      placeholder="Створіть пароль" >
-                  <span class="input__icon" id="show-hide-password">
+                  <span class="input__icon">
                      <i class="ri-eye-fill eye-opened hidden"></i>
                      <i class="ri-eye-off-fill eye-closed"></i>
                   </span>
@@ -295,7 +298,7 @@
             </div>
          </form>
          <p class="log-form__subtext">
-            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
+            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link">Увіти</span>
          </p>
       </div>
    </div>
@@ -307,7 +310,7 @@
 
       <div class="log-form__container">
          <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
+            <div class="log-form__close">
                <i class="ri-close-line"></i>
             </div>
          </div>
@@ -315,6 +318,7 @@
          <h1 class="log-form__title">Увійти</h1>
 
          <form action="#" class="log-form__form flex" method="post">
+            {% csrf_token %}
             <div class="log-form__field">
                <p class="field-title">Ваш email</p>
                <input type="email" class="log-form__input input__container" placeholder="Email" >
@@ -344,7 +348,7 @@
    </div>
 
    <!-- scripts -->
-   <script src="assets/js/main.js"></script>
+   <script src="static/js/main.js"></script>
 </body>
 
 </html>

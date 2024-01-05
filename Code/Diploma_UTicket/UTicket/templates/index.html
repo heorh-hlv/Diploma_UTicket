@@ -16,7 +16,7 @@
    <header class="header">
       <div class="header__container flex">
          <div class="header__logo">
-         <a href="index.html">
+         <a href="{% url 'home' %}">
             <img src="static/imgs/logo.svg" alt="">
          </a>
          </div>
@@ -56,15 +56,15 @@
                <div class="home__cards grid grid-template-columns-3">
                   <div class="home__card flex">
                      <i class="ri-calendar-check-line home__icon"></i>
-                     <a href="booking.html" class="home__button button-fill button-green">Забронювати</a>
+                     <a href="{% url 'booking' %}" class="home__button button-fill button-green">Забронювати</a>
                   </div>
                   <div class="home__card flex">
                      <i class="ri-ticket-2-line home__icon"></i>
-                     <a href="./check-boocking.html" class="home__button button-fill button-blue">Подивитися білет</a>
+                     <a href="{% url 'check_booking' %}" class="home__button button-fill button-blue">Подивитися білет</a>
                   </div>
                   <div class="home__card flex">
                      <i class="ri-calendar-close-line home__icon"></i>
-                     <a href="./cancel-booking.html" class="home__button button-fill button-red">Скасувати</a>
+                     <a href="{% url 'cancel_booking' %}" class="home__button button-fill button-red">Скасувати</a>
                   </div>
                </div>
             </div>
@@ -86,6 +86,7 @@
             </nav>
 
             <form action="" class="footer__form">
+               {% csrf_token %}
                <h3 class="list__title">Маєте питання?</h3>
                <div class="footer__form__fields grid grid-template-columns-3">
                   <div class="form__field">
@@ -120,24 +121,25 @@
          <h1 class="log-form__title">Зареєструватися</h1>
    
          <form action="#" class="log-form__form flex" method="post">
+            {% csrf_token %}
             <div class="log-form__field">
                <p class="field-title">Ваше ім’я</p>
-               <input type="text" class="log-form__input input__container" placeholder="Ім’я" required>
+               <input type="text" id="name" name="name" class="log-form__input input__container" placeholder="Ім’я" required>
             </div>
             <div class="log-form__field">
                <p class="field-title">Ваше прізвище</p>
-               <input type="text" class="log-form__input input__container" placeholder="Прізвище" required>
+               <input type="text" id="last_name" name="last_name" class="log-form__input input__container" placeholder="Прізвище" required>
             </div>
             <div class="log-form__field">
                <p class="field-title">Ваш email</p>
-               <input type="email" class="log-form__input input__container" placeholder="Email" required>
+               <input type="email" id="email" name="email" class="log-form__input input__container" placeholder="Email" required>
             </div>
             <div class="log-form__field">
                <p class="field-title">Пароль</p>
                <div class="log-form__input-with-icon">
-                  <input type="password" class="log-form__input input__container input-password" id="input-password"
+                  <input type="password" id="password" name="password" class="log-form__input input__container input-password"
                      placeholder="Створіть пароль" required>
-                  <span class="input__icon" id="show-hide-password">
+                  <span class="input__icon">
                      <i class="ri-eye-fill eye-opened hidden"></i>
                      <i class="ri-eye-off-fill eye-closed"></i>
                   </span>
@@ -146,7 +148,7 @@
             <div class="log-form__field">
                <p class="field-title">Дата народженя</p>
                <div class="log-form__input-with-icon">
-                  <input type="date" class="log-form__input input__container input-date" id="date-of-birth" required min="1900-12-31">
+                  <input type="date" id="date" name="date" class="log-form__input input__container input-date" required min="1900-12-31">
                </div>
             </div>
             <div class="log-form__field">
@@ -156,7 +158,7 @@
             </div>
          </form>
          <p class="log-form__subtext">
-            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
+            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link">Увіти</span>
          </p>
       </div>
    </div>
@@ -168,7 +170,7 @@
    
       <div class="log-form__container">
          <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
+            <div class="log-form__close">
                <i class="ri-close-line"></i>
             </div>
          </div>
@@ -176,16 +178,17 @@
          <h1 class="log-form__title">Увійти</h1>
    
          <form action="#" class="log-form__form flex" method="post">
+            {% csrf_token %}
             <div class="log-form__field">
                <p class="field-title">Ваш email</p>
-               <input type="email" class="log-form__input input__container" placeholder="Email" required>
+               <input type="email" id="email" name="email" class="log-form__input input__container" placeholder="Email" required>
             </div>
             <div class="log-form__field">
                <p class="field-title">Пароль</p>
                <div class="log-form__input-with-icon">
-                  <input type="password" class="log-form__input input__container input-password" id="input-password"
+                  <input type="password" class="log-form__input input__container input-password"
                      placeholder="Введіть пароль" required>
-                  <span class="input__icon" id="show-hide-password">
+                  <span class="input__icon">
                      <i class="ri-eye-fill eye-opened hidden"></i>
                      <i class="ri-eye-off-fill eye-closed"></i>
                   </span>
@@ -198,7 +201,7 @@
             </div>
          </form>
          <p class="log-form__subtext">
-            Ще не маєте облікового запису? <span onclick="openPopupSignup()" style="cursor: pointer;" class="subtext__link" id="to-login">Зареєструватися</span>
+            Ще не маєте облікового запису? <span onclick="openPopupSignup()" style="cursor: pointer;" class="subtext__link" >Зареєструватися</span>
          </p>
       </div>
    </div>
