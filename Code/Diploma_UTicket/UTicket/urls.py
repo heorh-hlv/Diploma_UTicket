@@ -4,13 +4,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.home_page),
-    path("home", views.home_page)
+    path("", views.home_page, name="home"),
+    path("home", views.home_page, name="home"),
+    path("booking", views.booking_page, name="booking"),
+    path("check-booking", views.check_page, name="check booking"),
+    path("cancel-booking", views.cancel_page, name="cancel booking"),
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,
-                              document_root=settings.MEDIA_ROOT)
