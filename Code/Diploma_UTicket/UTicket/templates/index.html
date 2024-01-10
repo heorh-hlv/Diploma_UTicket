@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+   <link rel="stylesheet" href="static/css/styles.css">
    <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
    <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
@@ -16,7 +16,7 @@
    <header class="header">
       <div class="header__container flex">
          <div class="header__logo">
-         <a href="{% url 'home' %}">
+         <a href="{% url 'index' %}">
             <img src="static/imgs/logo.svg" alt="">
          </a>
          </div>
@@ -33,14 +33,14 @@
                </li>
                <li class="menu__item">
                   <button class="menu__link input__container" id="signup-trigger">Зареєструватися</button>
-                  <!-- <ul class="menu__sublist" id="header-sublist">
+                  <ul class="menu__sublist" id="header-sublist">
                      <li class="sublist__item">
                         <button href="" class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
                      </li>
                      <li class="sublist__item">
                         <button href="" class="menu__sublink" id="logout-trigger">Вийти</button>
                      </li>
-                  </ul> -->
+                  </ul>
                </li>
             </ul>
          </nav>

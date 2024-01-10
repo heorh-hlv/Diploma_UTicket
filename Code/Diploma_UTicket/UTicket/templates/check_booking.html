@@ -16,7 +16,7 @@
    <header class="header">
       <div class="header__container flex">
          <div class="header__logo">
-            <a href="{% url 'home' %}">
+            <a href="{% url 'index' %}">
                <img src="static/imgs/logo.svg" alt="">
             </a>
          </div>
@@ -181,7 +181,7 @@
                <div class="log-form__input-with-icon">
                   <input type="password" class="log-form__input input__container input-password" id="input-password"
                      placeholder="Створіть пароль">
-                  <span class="input__icon" id="show-hide-password">
+                  <span class="input__icon">
                      <i class="ri-eye-fill eye-opened hidden"></i>
                      <i class="ri-eye-off-fill eye-closed"></i>
                   </span>
@@ -201,7 +201,7 @@
             </div>
          </form>
          <p class="log-form__subtext">
-            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
+            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link">Увіти</span>
          </p>
       </div>
    </div>
@@ -213,7 +213,7 @@
 
       <div class="log-form__container">
          <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
+            <div class="log-form__close">
                <i class="ri-close-line"></i>
             </div>
          </div>
