@@ -1,52 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="static/css/styles.css">
-   <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-   <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
-   <title>UTicket - Головна</title>
-</head>
-
-<body>
-   <!-- ============  HEADER  ============== -->
-   <header class="header">
-      <div class="header__container flex">
-         <div class="header__logo">
-            <a href="{% url 'index' %}">
-               <img src="static/imgs/logo.svg" alt="">
-            </a>
-         </div>
-         <nav class="header__menu">
-            <i class="ri-menu-line menu__icon open-menu" id="open-menu"></i>
-            <ul class="menu__list flex" id="menu">
-               <div class="menu__close__container flex">
-                  <div class="menu__close menu__icon" id="close-menu">
-                     <i class="ri-close-line"></i>
-                  </div>
-               </div>
-               <li class="menu__item">
-                  <button href="" class="menu__link input__container" id="login-trigger">Увійти</button>
-               </li>
-               <li class="menu__item">
-                  <button class="menu__link input__container" id="signup-trigger">Зареєструватися</button>
-                  <!-- <ul class="menu__sublist" id="header-sublist">
-                     <li class="sublist__item">
-                        <button href="" class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
-                     </li>
-                     <li class="sublist__item">
-                        <button href="" class="menu__sublink" id="logout-trigger">Вийти</button>
-                     </li>
-                  </ul> -->
-               </li>
-            </ul>
-         </nav>
-      </div>
-   </header>
-
+﻿{% extends 'base.html' %}
+{% block content %}
    <!-- ============  MAIN  ============== -->
    <main class="main">
       <div class="wrapper">
@@ -148,7 +101,8 @@
       </div>
    </footer>
 
-   <!-- ============  SIGNUP FORM  ============== -->
+<!--
+   ============  SIGNUP FORM  ==============
    <div class="pop-up__log-form" id="signup-form">
 
       <div class="background-darken"></div>
@@ -181,7 +135,7 @@
                <div class="log-form__input-with-icon">
                   <input type="password" class="log-form__input input__container input-password" id="input-password"
                      placeholder="Створіть пароль">
-                  <span class="input__icon">
+                  <span class="input__icon" id="show-hide-password">
                      <i class="ri-eye-fill eye-opened hidden"></i>
                      <i class="ri-eye-off-fill eye-closed"></i>
                   </span>
@@ -201,19 +155,19 @@
             </div>
          </form>
          <p class="log-form__subtext">
-            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link">Увіти</span>
+            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
          </p>
       </div>
    </div>
 
-   <!-- ============  LOGIN FORM  ============== -->
+   ============  LOGIN FORM  ==============
    <div class="pop-up__log-form" id="login-form">
 
       <div class="background-darken"></div>
 
       <div class="log-form__container">
          <div class="log-form__close__container flex">
-            <div class="log-form__close">
+            <div class="log-form__close" id="close-form">
                <i class="ri-close-line"></i>
             </div>
          </div>
@@ -248,11 +202,9 @@
                class="subtext__link" id="to-login">Зареєструватися</span>
          </p>
       </div>
-   </div>
+   </div> -->
 
    <!-- scripts -->
    <script src="static/js/main.js"></script>
    <script src="static/js/show_ticket.js"></script>
-</body>
-
-</html>
+{% endblock %}

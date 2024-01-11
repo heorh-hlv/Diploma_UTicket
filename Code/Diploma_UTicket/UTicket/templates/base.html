@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% load static %}
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="static/css/styles.css">
+   <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+   <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
+   <title>{% block title %}UTicket - Головна{% endblock %}</title>
+</head>
+
+<body>
+   <!-- ============  HEADER  ============== -->
+   <header class="header">
+      <div class="header__container flex">
+         <div class="header__logo">
+         <a href="{% url 'index' %}">
+            <img src="static/imgs/logo.svg" alt="">
+         </a>
+         </div>
+         <nav class="header__menu">
+            <i class="ri-menu-line menu__icon open-menu" id="open-menu"></i>
+            <ul class="menu__list flex" id="menu">
+               <div class="menu__close__container flex" >
+                  <div class="menu__close menu__icon" id="close-menu">
+                     <i class="ri-close-line"></i>
+                  </div>
+               </div>
+               {% if not request.user.is_authenticated %}
+               <li class="menu__item">
+                  <button href="" class="menu__link input__container" id="login-trigger">Увійти</button>
+               </li>
+               <li class="menu__item">
+                  <button class="menu__link input__container" id="signup-trigger">Зареєструватися</button>
+               </li>
+               {% elif request.user.is_authenticated %}
+               <li class="menu__item">
+                  <li class="menu__item">
+                  <button class="menu__link input__container">Hello, { request.user.username }</button>
+                  </li>
+                  <ul class="menu__sublist" id="header-sublist">
+                     <li class="sublist__item">
+                        <button href="" class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
+                     </li>
+                     <li class="sublist__item">
+                        <button href="" class="menu__sublink" id="logout-trigger">Вийти</button>
+                     </li>
+                  </ul>
+               </li>
+               {% endif %}
+            </ul>
+         </nav>
+      </div>
+   </header>
+
+{% block content %}
+{% endblock %}
+
+<!-- ============  FOOTER  ============== -->
+   <footer class="footer">
+      <div class="wrapper">
+         <div class="footer__container">
+            <nav class="footer__data grid grid-template-columns-3">
+               <ul class="footer__links">
+                  <h3 class="list__title">Компанія</h3>
+                  <li>
+                     <a href="" class="footer__link">Про нас</a>
+                  </li>
+               </ul>
+            </nav>
+
+            <form action="" class="footer__form">
+               {% csrf_token %}
+               <h3 class="list__title">Маєте питання?</h3>
+               <div class="footer__form__fields grid grid-template-columns-3">
+                  <div class="form__field">
+                     <p class="field__title">Ваш email</p>
+                     <input type="text" class="input__container form__input" placeholder="someone@example.com">
+                  </div>
+                  <div class="form__field">
+                     <p class="field__title">Питання</p>
+                     <input type="text" class="input__container form__input" placeholder="Мене цікавить...">
+                  </div>
+                  <div class="form__field footer__submit">
+                     <input type="submit" class=" input__container button-fill button-black form__button" value="Відправити">
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </footer>
+</body>
+</html>
