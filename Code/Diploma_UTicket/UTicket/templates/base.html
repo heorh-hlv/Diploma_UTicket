@@ -6,7 +6,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="static/css/styles.css">
-   <!-- <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}"> -->
+   <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}"
    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
    <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
    <title>{% block title %}UTicket - Головна{% endblock %}</title>
@@ -34,7 +34,7 @@
                   <a href="{% url 'login' %}" class="menu__link input__container" id="login-trigger">Увійти</a>
                </li>
                <li class="menu__item">
-                  <a href="{% url 'register' %}" class="menu__link input__container"
+                  <a href="{% url 'signup' %}" class="menu__link input__container"
                      id="signup-trigger">Зареєструватися</a>
                </li>
                {% elif request.user.is_authenticated %}
