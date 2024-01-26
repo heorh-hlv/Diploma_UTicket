@@ -330,10 +330,12 @@ button {
 /* =================  HEADER  ============== */
 
 .header {
+   position: relative;
    width: 100%;
    padding: 1.5rem 2rem;
    background-color: var(--clr-bg-grey);
    box-shadow: 0 0 14px 0 rgba(0, 0, 0, .25);
+   z-index: 99;
 }
 
 .header__container {
@@ -349,7 +351,7 @@ button {
 }
 
 .header__menu {
-   height: fit-content;
+   height: 100%;
 }
 
 .menu__icon {
@@ -357,17 +359,18 @@ button {
 }
 
 .menu__close__container {
-   position: none;
-   align-items: center;
-   justify-content: center;
+   position: absolute;
    top: 0;
    right: 0;
+   width: 0;
+   height: 0;
    transform: translate(-50%, 60%);
-   width: 3rem;
-   height: 3rem;
+   align-items: center;
+   justify-content: center;
    background: transparent;
    border-radius: 4rem;
    cursor: pointer;
+   pointer-events: none;
 }
 .menu__close__container:active {
    background-color: var();
@@ -375,6 +378,7 @@ button {
 
 .menu__list {
    flex-direction: row;
+   align-items: center;
    column-gap: 20px;
    transition: transform .2s ease-in-out;
 }
@@ -385,16 +389,17 @@ button {
 
 .menu__item {
    position: relative;
-   /* padding: 1rem 0; */
+   height: min-content;
 }
 
 .menu__link {
+   display: block;
    box-sizing: border-box;
    padding: 10px 20px;
    border-radius: .5rem;
    transition: all ease .2s;
    font-weight: var(--fw-medium);
-   font-size: var(--fs-normal);
+   font-size: var(--fs-normal) !important;
 }
 
 .menu__link#login-trigger {
@@ -419,19 +424,18 @@ button {
 }
 
 .menu__sublist {
-   opacity: 0;
-   pointer-events: none;
-   visibility: hidden;
    position: absolute;
-   margin-top: 10px;
-   transform: translate(0px, 10%);
+   visibility: hidden;
    top: auto;
    right: 0;
+   transform: translate(0px, 10%);
    padding: 1rem 0;
-   background-color: var(--clr-bg-white);
    border-radius: 10px;
+   background-color: var(--clr-bg-white);
    box-shadow: 0 4px 6px 1px rgba(0, 0, 0, .25);
    transition: all .3s ease-in-out;
+   opacity: 0;
+   pointer-events: none;
 }
 
 .menu__item:last-of-type:hover .menu__sublist {
@@ -441,17 +445,16 @@ button {
    pointer-events: all;
 }
 
-.sublist__item {
-   padding: 5px 10px;
-   text-align: center;
-}
-
-.sublist__item:hover {
-   backdrop-filter: brightness(.95);
-}
 
 .menu__sublink {
+   width: 100%;
+   padding: .5rem 2rem;
+   text-align: center;
    color: var(--clr-text-black);
+}
+
+.menu__sublink:hover, .menu__sublink:active {
+   backdrop-filter: brightness(.95);
 }
 
 .menu__sublink#logout-trigger {
@@ -518,9 +521,11 @@ button {
 /* =================  FOOTER  ============== */
 
 .footer {
+   position: relative;
    width: 100%;
    background-color: var(--clr-bg-grey);
    box-shadow: 0 0 14px 0 rgba(0, 0, 0, .25);
+   z-index: 99;
 }
 
 .footer__container {
@@ -602,95 +607,34 @@ button {
 /* =================  LOGIN and SIGNUP FORMS  ============== */
 
 .pop-up__log-form {
-   position: absolute;
-   top: -150%;
+   position: relative;
+   display: flex;
    width: 100%;
-   height: 100%;
-   overflow: hidden;
-   transition: top 0s ease .4s;
-}
-
-.show-form {
-   top: 0;
-   transition: top 0s ease 0s;
-}
-
-.background-darken {
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   background: rgba(0, 0, 0, .6);
-   z-index: 50;
-   opacity: 0;
-   transition: opacity .2s ease-out .2s;
-}
-
-.show-form .background-darken {
-   opacity: 1;
-   transition: opacity .2s ease-out 0s;
+   padding: 8rem 3rem;
+   justify-content: center;
 }
 
 .log-form__container {
-   position: absolute;
-   top: 50%;
-   z-index: 51;
-   left: 50%;
-   transform: translate(-50%, -50%) scale(1.25);
-   width: 75%;
-   max-width: 500px;
+   width: 100%;
+   max-width: 45rem;
    padding: 5rem;
+   border-radius: 1rem;
    background: var(--clr-bg-white);
-   border-radius: 10px;
-   box-shadow: 0 0 12px 4px rgba(0, 0, 0, .25);
-   opacity: 0;
-   transition: opacity .2s ease-out 0s,
-               transform .2s ease-out 0s;
-}
-
-.show-form .log-form__container {
-   opacity: 1;
-   transform: translate(-50%, -50%) scale(1);
-   transition: opacity .2s ease-out 0s,
-               transform .2s ease-out 0s;
-}
-
-.log-form__close__container {
-   position: absolute;
-   align-items: center;
-   justify-content: center;
-   top: 0;
-   right: 0;
-   transform: translate(-50%, 50%);
-   width: 2.5rem;
-   height: 2.5rem;
-   background: transparent;
-   border-radius: 4rem;
-   cursor: pointer;
-}
-.log-form__close__container:hover {
-   background: var(--clr-bg-grey);
-}
-.log-form__close__container:active {
-   background: var(--clr-hover-light);
-}
-
-.log-form__close  i{
-   font-size: var(--fs-big);
-   color: var(--clr-text-grey-2)
+   box-shadow: 0 0 12px 4px rgba(0, 0, 0, .125);
 }
 
 .log-form__title {
+   margin-bottom: 2rem;
    color: var(--clr-text-black);
    font-size: var(--fs-bigger);
    font-weight: var(--fw-medium);
    text-align: center;
-   margin-bottom: 2rem;
 }
 
 .log-form__form {
    flex-direction: column;
    justify-content: space-between;
-   row-gap: .5rem;
+   row-gap: 1rem;
 }
 
 .log-form__field {
@@ -1074,6 +1018,10 @@ input[type=radio]:checked ~ .input-check::before{
 
 /* for medium devices */
 @media (max-width: 991px) {
+   .menu__sublist {
+      padding: .75rem 0;
+   }
+   
    .section {
       margin-top: 12rem;
       margin-bottom: 12rem;
@@ -1159,6 +1107,26 @@ input[type=radio]:checked ~ .input-check::before{
 
 /* for small devices */
 @media screen and (max-width: 767px) {
+   .menu__sublist {
+      position: relative;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+   }
+   .menu__sublink {
+      height: 3rem;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      border: 1px var(--clr-hover-light) solid;
+      border-radius: 10px;
+      margin-top: 1rem;
+   }
+   
    .section {
       margin-top: 8rem;
       margin-bottom: 8rem;
@@ -1183,7 +1151,9 @@ input[type=radio]:checked ~ .input-check::before{
       font-size: 2rem;
    }
    .menu__close__container {
-      position: absolute;
+      width: 3rem;
+      height: 3rem;
+      pointer-events: all;
    }
    .close-menu {
       position: absolute;
@@ -1193,6 +1163,9 @@ input[type=radio]:checked ~ .input-check::before{
    .menu__link {
       height: 3rem;
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
    }
 
    .home__cards {
@@ -1214,13 +1187,8 @@ input[type=radio]:checked ~ .input-check::before{
    }
 
    .log-form__container {
-      max-width: none;
-      width: 100svw;
-      height: 100svh;
-      border-radius: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 3rem;
+      /* border-radius: 0; */
    }
 
    .form-chapter {
@@ -1303,8 +1271,14 @@ input[type=radio]:checked ~ .input-check::before{
       row-gap: .5rem;
    }
 
+   .pop-up__log-form {
+      /* padding: 4rem 1rem; */
+      padding-left: 1rem;
+      padding-right: 1rem;
+   }
    .log-form__container {
-      padding: 4rem 2rem;
+      box-shadow: none;
+      padding: 4rem 0;
    }
    .log-form__title {
       font-size: var(--fs-medium);

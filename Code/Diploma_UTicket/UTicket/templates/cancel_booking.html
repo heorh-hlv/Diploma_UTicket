@@ -1,200 +1,97 @@
 ﻿{% extends 'base.html' %}
 {% block content %}
-   <!-- ============  MAIN  ============== -->
-   <main class="main">
-      <div class="wrapper">
 
-         <!-- ============  CANCEL BOOKING  ============== -->
-         <section class="cancel-booking section">
-            <form action="" class="cancel-booking form">
-               {% csrf_token %}
-               <div class="form-chapter form-chapter-small">
-                  <div class="chapter__fields grid grid-template-columns-4">
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <p class="field__title">ID квитка*</p>
-                        <input type="text" id="ticket-id" class="chapter__input input__container " placeholder="111111111">
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="form-chapter">
-                  <h1 class="chapter__subtitle cancel-reason-title">
-                     Причина скасування
-                  </h1>
-                  <div class="chapter__fields grid grid-template-columns-4">
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align">
-                           <input type="radio" class="input-radio" id="cancel-reason-1" name="cancel-reason">
-                           <label for="cancel-reason-1" class="radio__lablel">Зміни в планах подорожі</label>
-                           <div class="input-check"></div>
-                        </div>
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align">
-                           <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-2">
-                           <label for="cancel-reason-2" class="radio__lablel">Погодні умови</label>
-                           <div class="input-check"></div>
-                        </div>
-                        
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align">
-                           <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-3">
-                           <label for="cancel-reason-3" class="radio__lablel">Проблеми зі здоров’ям</label>
-                           <div class="input-check"></div>
-                        </div>
-                        
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align">
-                           <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-4">
-                           <label for="cancel-reason-4" class="radio__lablel">Справи стосовно праці</label>
-                           <div class="input-check"></div>
-                        </div>
-                        
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align"><input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-5">
-                        <label for="cancel-reason-5" class="radio__lablel">Сімейні або особисті надзвичайна ситуація</label>
-                        <div class="input-check"></div>
-                     </div>
-                        
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align">
-                           <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-6">
-                           <label for="cancel-reason-6" class="radio__lablel">Проблеми з візою</label>
-                           <div class="input-check"></div>
-                        </div>
-                        
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <div class="radio__button-align">
-                           <input name="cancel-reason" type="radio" class="input-radio" id="other-reasons-cancelling-trigger">
-                           <label for="other-reasons-cancelling-trigger" class="radio__lablel" >Інше</label>
-                           <div class="input-check"></div>
-                        </div>
-                        
-                     </div>
-                  </div>
-                  <div class="full-size-field hidden" id="other-reasons-cancelling-textarea" tabindex="-1">
-                     <textarea class="cutsom-textarea input__container counted-chars-area" placeholder="Маю проблеми з..." name="" id=""  maxlength="500"></textarea>
-                     <p class="chars-counter">0 / 500</p>
-                  </div>
-               </div>
-               <div class="form__submit">
-                  <button class="button-fill button-red input__container" type="submit">
-                     Скасувати
-                  </button>
-               </div>
-            </form>
-         </section>
-
-      </div>
-   </main>
-<!--
-   ============  SIGNUP FORM  ==============
-   <div class="pop-up__log-form" id="signup-form">
-
-      <div class="background-darken"></div>
-
-      <div class="log-form__container">
-         <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
-               <i class="ri-close-line"></i>
+<!-- ============  CANCEL BOOKING  ============== -->
+<section class="cancel-booking section">
+   <form action="" class="cancel-booking form">
+      {% csrf_token %}
+      <div class="form-chapter form-chapter-small">
+         <div class="chapter__fields grid grid-template-columns-4">
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field__title">ID квитка*</p>
+               <input type="text" id="ticket-id" class="chapter__input input__container " placeholder="111111111">
+               <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
             </div>
          </div>
-
-         <h1 class="log-form__title">Зареєструватися</h1>
-
-         <form action="#" class="log-form__form flex" method="post">
-            {% csrf_token %}
-            <div class="log-form__field">
-               <p class="field-title">Ваше ім’я</p>
-               <input type="text" class="log-form__input input__container" placeholder="Ім’я">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Ваше прізвище</p>
-               <input type="text" class="log-form__input input__container" placeholder="Прізвище">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Ваш email</p>
-               <input type="email" class="log-form__input input__container" placeholder="Email">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Пароль</p>
-               <div class="log-form__input-with-icon">
-                  <input type="password" class="log-form__input input__container input-password" id="input-password"
-                     placeholder="Створіть пароль">
-                  <span class="input__icon" id="show-hide-password">
-                     <i class="ri-eye-fill eye-opened hidden"></i>
-                     <i class="ri-eye-off-fill eye-closed"></i>
-                  </span>
-               </div>
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Дата народженя</p>
-               <div class="log-form__input-with-icon">
-                  <input type="date" class="log-form__input input__container input-date input-birthday"
-                     id="date-of-birth" min="1900-12-31">
-               </div>
-            </div>
-            <div class="log-form__field">
-               <button class="log-form__submit button-fill button-blue" type="submit">
-                  Продовжити
-               </button>
-            </div>
-         </form>
-         <p class="log-form__subtext">
-            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
-         </p>
       </div>
-   </div>
+      <div class="form-chapter">
+         <h1 class="chapter__subtitle cancel-reason-title">
+            Причина скасування
+         </h1>
+         <div class="chapter__fields grid grid-template-columns-4">
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align">
+                  <input type="radio" class="input-radio" id="cancel-reason-1" name="cancel-reason">
+                  <label for="cancel-reason-1" class="radio__lablel">Зміни в планах подорожі</label>
+                  <div class="input-check"></div>
+               </div>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align">
+                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-2">
+                  <label for="cancel-reason-2" class="radio__lablel">Погодні умови</label>
+                  <div class="input-check"></div>
+               </div>
 
-   ============  LOGIN FORM  ==============
-   <div class="pop-up__log-form" id="login-form">
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align">
+                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-3">
+                  <label for="cancel-reason-3" class="radio__lablel">Проблеми зі здоров’ям</label>
+                  <div class="input-check"></div>
+               </div>
 
-      <div class="background-darken"></div>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align">
+                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-4">
+                  <label for="cancel-reason-4" class="radio__lablel">Справи стосовно праці</label>
+                  <div class="input-check"></div>
+               </div>
 
-      <div class="log-form__container">
-         <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
-               <i class="ri-close-line"></i>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align"><input name="cancel-reason" type="radio" class="input-radio"
+                     id="cancel-reason-5">
+                  <label for="cancel-reason-5" class="radio__lablel">Сімейні або особисті надзвичайна
+                     ситуація</label>
+                  <div class="input-check"></div>
+               </div>
+
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align">
+                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-6">
+                  <label for="cancel-reason-6" class="radio__lablel">Проблеми з візою</label>
+                  <div class="input-check"></div>
+               </div>
+
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <div class="radio__button-align">
+                  <input name="cancel-reason" type="radio" class="input-radio" id="other-reasons-cancelling-trigger">
+                  <label for="other-reasons-cancelling-trigger" class="radio__lablel">Інше</label>
+                  <div class="input-check"></div>
+               </div>
+
             </div>
          </div>
-
-         <h1 class="log-form__title">Увійти</h1>
-
-         <form action="#" class="log-form__form flex" method="post">
-            {% csrf_token %}
-            <div class="log-form__field">
-               <p class="field-title">Ваш email</p>
-               <input type="email" class="log-form__input input__container" placeholder="Email">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Пароль</p>
-               <div class="log-form__input-with-icon">
-                  <input type="password" class="log-form__input input__container input-password" id="input-password"
-                     placeholder="Введіть пароль">
-                  <span class="input__icon" id="show-hide-password">
-                     <i class="ri-eye-fill eye-opened hidden"></i>
-                     <i class="ri-eye-off-fill eye-closed"></i>
-                  </span>
-               </div>
-            </div>
-            <div class="log-form__field">
-               <button class="log-form__submit button-fill button-blue" type="submit">
-                  Увійти
-               </button>
-            </div>
-         </form>
-         <p class="log-form__subtext">
-            Ще не маєте облікового запису? <span onclick="openPopupSignup()" style="cursor: pointer;"
-               class="subtext__link" id="to-login">Зареєструватися</span>
-         </p>
+         <div class="full-size-field hidden" id="other-reasons-cancelling-textarea" tabindex="-1">
+            <textarea class="cutsom-textarea input__container counted-chars-area" placeholder="Маю проблеми з..."
+               name="" id="" maxlength="500"></textarea>
+            <p class="chars-counter">0 / 500</p>
+         </div>
       </div>
-   </div> -->
+      <div class="form__submit">
+         <button class="button-fill button-red input__container" type="submit">
+            Скасувати
+         </button>
+      </div>
+   </form>
+</section>
 
-   <!-- scripts -->
-   <script src="static/js/main.js"></script>
+
+
+<!-- scripts -->
+<script src="static/js/forms.js"></script>
 {% endblock %}

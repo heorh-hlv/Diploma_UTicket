@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    {% load static %}
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="static/css/styles.css">
-   <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
+   <!-- <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}"> -->
    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
    <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
    <title>{% block title %}UTicket - Головна{% endblock %}</title>
@@ -16,36 +17,35 @@
    <header class="header">
       <div class="header__container flex">
          <div class="header__logo">
-         <a href="{% url 'index' %}">
-            <img src="static/imgs/logo.svg" alt="">
-         </a>
+            <a href="{% url 'index' %}">
+               <img src="static/imgs/logo.svg" alt="">
+            </a>
          </div>
          <nav class="header__menu">
             <i class="ri-menu-line menu__icon open-menu" id="open-menu"></i>
             <ul class="menu__list flex" id="menu">
-               <div class="menu__close__container flex" >
+               <div class="menu__close__container flex">
                   <div class="menu__close menu__icon" id="close-menu">
                      <i class="ri-close-line"></i>
                   </div>
                </div>
                {% if not request.user.is_authenticated %}
                <li class="menu__item">
-                  <button href="" class="menu__link input__container" id="login-trigger">Увійти</button>
+                  <a href="{% url 'login' %}" class="menu__link input__container" id="login-trigger">Увійти</a>
                </li>
                <li class="menu__item">
-                  <button class="menu__link input__container" id="signup-trigger">Зареєструватися</button>
+                  <a href="{% url 'register' %}" class="menu__link input__container"
+                     id="signup-trigger">Зареєструватися</a>
                </li>
                {% elif request.user.is_authenticated %}
                <li class="menu__item">
-                  <li class="menu__item">
-                  <button class="menu__link input__container">Hello, { request.user.username }</button>
-                  </li>
+                  <button class="menu__link input__container">Вітаємо, <span style="color: var(--clr-blue);">{ request.user.username }</span></button>
                   <ul class="menu__sublist" id="header-sublist">
                      <li class="sublist__item">
-                        <button href="" class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
+                        <button class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
                      </li>
                      <li class="sublist__item">
-                        <button href="" class="menu__sublink" id="logout-trigger">Вийти</button>
+                        <button class="menu__sublink" id="logout-trigger">Вийти</button>
                      </li>
                   </ul>
                </li>
@@ -55,10 +55,15 @@
       </div>
    </header>
 
-{% block content %}
-{% endblock %}
+   <!-- ============  MAIN  ============== -->
+   <main class="main">
+      <div class="wrapper">
+         {% block content %}
+         {% endblock %}
+      </div>
+   </main>
 
-<!-- ============  FOOTER  ============== -->
+   <!-- ============  FOOTER  ============== -->
    <footer class="footer">
       <div class="wrapper">
          <div class="footer__container">
@@ -84,12 +89,17 @@
                      <input type="text" class="input__container form__input" placeholder="Мене цікавить...">
                   </div>
                   <div class="form__field footer__submit">
-                     <input type="submit" class=" input__container button-fill button-black form__button" value="Відправити">
+                     <input type="submit" class=" input__container button-fill button-black form__button"
+                        value="Відправити">
                   </div>
                </div>
             </form>
          </div>
       </div>
    </footer>
+
+   <!-- scripts -->
+   <script src="static/js/main.js"></script>
 </body>
+
 </html>

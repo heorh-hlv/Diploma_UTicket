@@ -1,210 +1,68 @@
 ﻿{% extends 'base.html' %}
 {% block content %}
-   <!-- ============  MAIN  ============== -->
-   <main class="main">
-      <div class="wrapper">
 
-         <!-- ============  CANCEL BOOKING  ============== -->
-         <section class="cancel-booking section">
-            <form class="cancel-booking form">
-               {% csrf_token %}
-               <div class="form-chapter form-chapter-small">
-                  <div class="chapter__fields grid grid-template-columns-4">
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <p class="field__title">ID квитка*</p>
-                        <input type="text" id="ticket-id" class="chapter__input input__container "
-                           placeholder="111111111">
-                        <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.
-                        </p>
-                     </div>
-                     <div class="chapter__field grid-field" tabindex="-1">
-                        <p class="field__title invisible-text">submit-button</p>
-                        <button class="form__submit button-fill button-blue input__container chapter__button" id="check-booking-button">
-                           Переглянути
-                        </button>
-                     </div>
-                  </div>
-               </div>
-            </form>
-
-            <table class="table__booking-info table hidden" id="ticket-data">
-               <caption class="table-caption chapter__title">Інформація про квиток</caption>
-
-               <tbody class="table-body">
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">ПІБ пасажира</td>
-                     <td class="table-cell" role="cell">Кисельов Назар Олексійович</td>
-                  </tr>
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">Дата і час вильоту</td>
-                     <td class="table-cell" role="cell">12 березня 2024, 15:30</td>
-                  </tr>
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">Місце вильоту</td>
-                     <td class="table-cell" role="cell">Київ, Міжнародний аеропорт "Бориспіль" (KBP)</td>
-                  </tr>
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">Місто призначення</td>
-                     <td class="table-cell" role="cell">Париж, Міжнародний аеропорт "Шарль де Голль" (CDG)</td>
-                  </tr>
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">Номер рейсу</td>
-                     <td class="table-cell" role="cell">PS123</td>
-                  </tr>
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">Клас обслуговування</td>
-                     <td class="table-cell" role="cell">Бізнес-клас</td>
-                  </tr>
-                  <tr class="table-row" role="row">
-                     <td class="table-cell" role="cell">Номер місця</td>
-                     <td class="table-cell" role="cell">22A</td>
-                  </tr>
-               </tbody>
-            </table>
-         </section>
-
-      </div>
-   </main>
-
-   <!-- ============  FOOTER  ============== -->
-   <footer class="footer">
-      <div class="wrapper">
-         <div class="footer__container">
-            <nav class="footer__data grid grid-template-columns-3">
-               <ul class="footer__links">
-                  <h3 class="list__title">Компанія</h3>
-                  <li>
-                     <a href="" class="footer__link">Про нас</a>
-                  </li>
-               </ul>
-            </nav>
-
-            <form action="" class="footer__form" id="footer-form">
-               {% csrf_token %}
-               <h3 class="list__title">Маєте питання?</h3>
-               <div class="footer__form__fields grid grid-template-columns-3">
-                  <div class="form__field">
-                     <p class="field__title">Ваш email</p>
-                     <input type="text" class="input__container form__input" placeholder="someone@example.com" required>
-                  </div>
-                  <div class="form__field">
-                     <p class="field__title">Питання</p>
-                     <input type="text" class="input__container form__input" placeholder="Мене цікавить..." required>
-                  </div>
-                  <div class="form__field footer__submit">
-                     <input type="submit" class=" input__container button-fill button-black form__button"
-                        value="Відправити">
-                  </div>
-               </div>
-            </form>
-         </div>
-      </div>
-   </footer>
-
-<!--
-   ============  SIGNUP FORM  ==============
-   <div class="pop-up__log-form" id="signup-form">
-
-      <div class="background-darken"></div>
-
-      <div class="log-form__container">
-         <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
-               <i class="ri-close-line"></i>
+<!-- ============  CHECK BOOKING  ============== -->
+<section class="cancel-booking section">
+   <form class="cancel-booking form">
+      {% csrf_token %}
+      <div class="form-chapter form-chapter-small">
+         <div class="chapter__fields grid grid-template-columns-4">
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field__title">ID квитка*</p>
+               <input type="text" id="ticket-id" class="chapter__input input__container " placeholder="111111111">
+               <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.
+               </p>
             </div>
-         </div>
-
-         <h1 class="log-form__title">Зареєструватися</h1>
-
-         <form action="#" class="log-form__form flex" method="post">
-            {% csrf_token %}
-            <div class="log-form__field">
-               <p class="field-title">Ваше ім’я</p>
-               <input type="text" class="log-form__input input__container" placeholder="Ім’я">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Ваше прізвище</p>
-               <input type="text" class="log-form__input input__container" placeholder="Прізвище">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Ваш email</p>
-               <input type="email" class="log-form__input input__container" placeholder="Email">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Пароль</p>
-               <div class="log-form__input-with-icon">
-                  <input type="password" class="log-form__input input__container input-password" id="input-password"
-                     placeholder="Створіть пароль">
-                  <span class="input__icon" id="show-hide-password">
-                     <i class="ri-eye-fill eye-opened hidden"></i>
-                     <i class="ri-eye-off-fill eye-closed"></i>
-                  </span>
-               </div>
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Дата народженя</p>
-               <div class="log-form__input-with-icon">
-                  <input type="date" class="log-form__input input__container input-date input-birthday"
-                     id="date-of-birth" min="1900-12-31">
-               </div>
-            </div>
-            <div class="log-form__field">
-               <button class="log-form__submit button-fill button-blue" type="submit">
-                  Продовжити
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field__title invisible-text">submit-button</p>
+               <button class="form__submit button-fill button-blue input__container chapter__button"
+                  id="check-booking-button">
+                  Переглянути
                </button>
             </div>
-         </form>
-         <p class="log-form__subtext">
-            Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
-         </p>
-      </div>
-   </div>
-
-   ============  LOGIN FORM  ==============
-   <div class="pop-up__log-form" id="login-form">
-
-      <div class="background-darken"></div>
-
-      <div class="log-form__container">
-         <div class="log-form__close__container flex">
-            <div class="log-form__close" id="close-form">
-               <i class="ri-close-line"></i>
-            </div>
          </div>
-
-         <h1 class="log-form__title">Увійти</h1>
-
-         <form action="#" class="log-form__form flex" method="post">
-            {% csrf_token %}
-            <div class="log-form__field">
-               <p class="field-title">Ваш email</p>
-               <input type="email" class="log-form__input input__container" placeholder="Email">
-            </div>
-            <div class="log-form__field">
-               <p class="field-title">Пароль</p>
-               <div class="log-form__input-with-icon">
-                  <input type="password" class="log-form__input input__container input-password" id="input-password"
-                     placeholder="Введіть пароль">
-                  <span class="input__icon" id="show-hide-password">
-                     <i class="ri-eye-fill eye-opened hidden"></i>
-                     <i class="ri-eye-off-fill eye-closed"></i>
-                  </span>
-               </div>
-            </div>
-            <div class="log-form__field">
-               <button class="log-form__submit button-fill button-blue" type="submit">
-                  Увійти
-               </button>
-            </div>
-         </form>
-         <p class="log-form__subtext">
-            Ще не маєте облікового запису? <span onclick="openPopupSignup()" style="cursor: pointer;"
-               class="subtext__link" id="to-login">Зареєструватися</span>
-         </p>
       </div>
-   </div> -->
+   </form>
 
-   <!-- scripts -->
-   <script src="static/js/main.js"></script>
-   <script src="static/js/show_ticket.js"></script>
+   <table class="table__booking-info table hidden" id="ticket-data">
+      <caption class="table-caption chapter__title">Інформація про квиток</caption>
+
+      <tbody class="table-body">
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">ПІБ пасажира</td>
+            <td class="table-cell" role="cell">Кисельов Назар Олексійович</td>
+         </tr>
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">Дата і час вильоту</td>
+            <td class="table-cell" role="cell">12 березня 2024, 15:30</td>
+         </tr>
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">Місце вильоту</td>
+            <td class="table-cell" role="cell">Київ, Міжнародний аеропорт "Бориспіль" (KBP)</td>
+         </tr>
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">Місто призначення</td>
+            <td class="table-cell" role="cell">Париж, Міжнародний аеропорт "Шарль де Голль" (CDG)</td>
+         </tr>
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">Номер рейсу</td>
+            <td class="table-cell" role="cell">PS123</td>
+         </tr>
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">Клас обслуговування</td>
+            <td class="table-cell" role="cell">Бізнес-клас</td>
+         </tr>
+         <tr class="table-row" role="row">
+            <td class="table-cell" role="cell">Номер місця</td>
+            <td class="table-cell" role="cell">22A</td>
+         </tr>
+      </tbody>
+   </table>
+</section>
+
+
+
+<!-- scripts -->
+<script src="static/js/forms.js"></script>
+<script src="static/js/check_booking.js"></script>
 {% endblock %}
