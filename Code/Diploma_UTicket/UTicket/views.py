@@ -15,6 +15,16 @@ def cancel_page(request):
 # @login_required   
 def check_page(request):
     return render(request, 'check_booking.html')
+    
+def login(request):
+    if  request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, 'index')
+    return render(request, 'login.html')
 
 def signup(request):
     if request.method == "POST":
@@ -40,16 +50,6 @@ def signup(request):
             login(request, user)
             return redirect('index')
     return render(request, 'signup.html')
-
-def login(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')
-    return render(request, 'login.html')
 
 @login_required
 def logout_view(request):
