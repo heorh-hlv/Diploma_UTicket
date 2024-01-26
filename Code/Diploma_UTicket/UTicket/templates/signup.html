@@ -11,20 +11,20 @@
          {% csrf_token %}
          <div class="field log-form__field">
             <p class="field-title">Ваше ім’я</p>
-            <input type="text" class="log-form__input input__container" placeholder="Ім’я" required>
+            <input type="text" class="log-form__input input__container" placeholder="Ім’я" id="first_name" name="first_name" required>
          </div>
          <div class="field log-form__field">
             <p class="field-title">Ваше прізвище</p>
-            <input type="text" class="log-form__input input__container" placeholder="Прізвище" required>
+            <input type="text" class="log-form__input input__container" placeholder="Прізвище" id="last_name" name="last_name" required>
          </div>
          <div class="field log-form__field">
             <p class="field-title">Ваш email</p>
-            <input type="email" class="log-form__input input__container" placeholder="Email" required>
+            <input type="email" class="log-form__input input__container" placeholder="Email" id="email" name="email" required>
          </div>
          <div class="field log-form__field">
             <p class="field-title">Пароль</p>
             <div class="log-form__input-with-icon">
-               <input type="password" class="log-form__input input__container input-password" id="input-password" placeholder="Створіть пароль" required>
+               <input type="password" class="log-form__input input__container input-password" id="input-password" placeholder="Створіть пароль" name="password" required>
                <span class="input__icon" id="show-hide-password">
                   <i class="ri-eye-fill eye-opened hidden"></i>
                   <i class="ri-eye-off-fill eye-closed"></i>
@@ -34,7 +34,7 @@
          <div class="field log-form__field">
             <p class="field-title">Дата народженя</p>
             <div class="log-form__input-with-icon">
-               <input type="date" class="log-form__input input__container input-date input-birthday" id="date-of-birth"
+               <input type="date" class="log-form__input input__container input-date input-birthday" id="date-of-birth" name="date-of-birth"
                   min="1900-12-31" required>
             </div>
          </div>
