@@ -2,29 +2,36 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import NewUser
+from django.contrib import messages
 from django.contrib.auth import logout
+
 # Create your views here.
 def home_page(request):
     return render(request, 'index.html')
+
 @login_required
 def booking_page(request):
     return render(request, 'booking.html')
+
 @login_required
 def cancel_page(request):
     return render(request, 'cancel_booking.html')
+
 @login_required
 def check_page(request):
     return render(request, 'check_booking.html')
-    
-def login(request):
-    if  request.method == "POST":
+
+
+def user_login(request):
+    if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'index')
+            return redirect('index')
     return render(request, 'login.html')
+
 
 def signup(request):
     if request.method == "POST":
@@ -49,7 +56,9 @@ def signup(request):
             return redirect('index')
     return render(request, 'signup.html')
 
+
 @login_required
 def logout_view(request):
-    logout(request)
-    return redirect('index')
+    if request.method == "POST":
+        logout(request)
+        return redirect('login')

@@ -10,16 +10,16 @@
       <form action="#" class="log-form__form flex" method="post">
          {% csrf_token %}
          <div class="field log-form__field">
+            <p class="field-title">Ваш email</p>
+            <input type="email" class="log-form__input input__container" placeholder="Email" id="email" name="email" required>
+         </div>
+         <div class="field log-form__field">
             <p class="field-title">Ваше ім’я</p>
             <input type="text" class="log-form__input input__container" placeholder="Ім’я" id="first_name" name="first_name" required>
          </div>
          <div class="field log-form__field">
             <p class="field-title">Ваше прізвище</p>
             <input type="text" class="log-form__input input__container" placeholder="Прізвище" id="last_name" name="last_name" required>
-         </div>
-         <div class="field log-form__field">
-            <p class="field-title">Ваш email</p>
-            <input type="email" class="log-form__input input__container" placeholder="Email" id="email" name="email" required>
          </div>
          <div class="field log-form__field">
             <p class="field-title">Пароль</p>

@@ -39,13 +39,13 @@
                </li>
                {% elif request.user.is_authenticated %}
                <li class="menu__item">
-                  <button class="menu__link input__container">Вітаємо, <span style="color: var(--clr-blue);">{ request.user.username }</span></button>
+                  <button class="menu__link input__container">Вітаємо, <span style="color: var(--clr-blue);">{{ request.user.first_name }}</span></button>
                   <ul class="menu__sublist" id="header-sublist">
                      <li class="sublist__item">
-                        <button class="menu__sublink" id="change-user-trigger">Змінити користувача</button>
+                        <a class="menu__sublink" href="/logout" id="change-user-trigger">Змінити користувача</a>
                      </li>
                      <li class="sublist__item">
-                        <button class="menu__sublink" id="logout-trigger">Вийти</button>
+                        <a class="menu__sublink" id="logout-trigger">Вийти</a>
                      </li>
                   </ul>
                </li>
