@@ -31,7 +31,7 @@
                </div>
                {% if not request.user.is_authenticated %}
                <li class="menu__item">
-                  <a href="{% url 'login' %}" class="menu__link input__container" id="login-trigger">Увійти</a>
+                  <a href="{% url 'login_view' %}" class="menu__link input__container" id="login-trigger">Увійти</a>
                </li>
                <li class="menu__item">
                   <a href="{% url 'signup' %}" class="menu__link input__container"
@@ -42,10 +42,10 @@
                   <button class="menu__link input__container">Вітаємо, <span style="color: var(--clr-blue);">{{ request.user.first_name }}</span></button>
                   <ul class="menu__sublist" id="header-sublist">
                      <li class="sublist__item">
-                        <a class="menu__sublink" href="/logout" id="change-user-trigger">Змінити користувача</a>
+                        <a class="menu__sublink" href="{% url 'change_user' %}" id="change-user-trigger">Змінити користувача</a>
                      </li>
                      <li class="sublist__item">
-                        <a class="menu__sublink" id="logout-trigger">Вийти</a>
+                        <a class="menu__sublink" href="{% url 'logout_view' %}" id="logout-trigger">Вийти</a>
                      </li>
                   </ul>
                </li>

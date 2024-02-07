@@ -11,10 +11,9 @@ class NewUser(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     date_of_birth = models.DateField(null=True, blank=True)
 
+    objects = CustomUserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
-
-    objects = CustomUserManager()
 
     def __str__(self):
         return self.email

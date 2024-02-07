@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .models import NewUser
 from django.contrib import messages
 from django.contrib.auth import logout
-
 # Create your views here.
 def home_page(request):
     return render(request, 'index.html')
@@ -22,14 +21,16 @@ def check_page(request):
     return render(request, 'check_booking.html')
 
 
-def user_login(request):
+def login_view(request):
     if request.method == "POST":
-        email = request.POST['email']
-        password = request.POST['password']
+        email = request.POST.get("email")
+        password = request.POST.get("password")
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('index')
+        else:
+            messages.error(request, "Неверный адрес электронной почты или пароль.")
     return render(request, 'login.html')
 
 
@@ -59,6 +60,10 @@ def signup(request):
 
 @login_required
 def logout_view(request):
-    if request.method == "POST":
-        logout(request)
-        return redirect('login')
+    logout(request)
+    return redirect('/')
+
+@login_required
+def change_user(request):
+    logout(request)
+    return redirect('login_view')

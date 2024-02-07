@@ -83,11 +83,8 @@ body {
 body {
    text-rendering: optimizeSpeed;
    line-height: 1.5;
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-   text-decoration-skip-ink: auto;
+   display: flex;
+   flex-direction: column;
 }
 
 /* Make images easier to work with */
@@ -97,7 +94,7 @@ svg {
    max-width: 100%;
    max-height: 100%;
    display: block;
-   will-change: opacity;
+   /*will-change: opacity;*/
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -171,21 +168,6 @@ button {
    cursor: pointer;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-   html:focus-within {
-      scroll-behavior: auto;
-   }
-
-   *,
-   *::before,
-   *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-   }
-}
 
 /* =================  UTILITY CLASSES  ============== */
 
@@ -523,6 +505,7 @@ button {
 .footer {
    position: relative;
    width: 100%;
+   margin-top: auto;
    background-color: var(--clr-bg-grey);
    box-shadow: 0 0 14px 0 rgba(0, 0, 0, .25);
    z-index: 99;
