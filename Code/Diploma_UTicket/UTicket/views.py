@@ -87,13 +87,13 @@ def signup(request):
             return HttpResponse("<h3>Введіть пошту</h3>")
         elif password is None:
             return HttpResponse("<h3>Введіть пароль</h3>")
-        elif date_of_birth is None:
-            return HttpResponse("<h3>Введіть дату народження</h3>")
+        # elif date_of_birth is None:
+        #     return HttpResponse("<h3>Введіть дату народження</h3>")
         else:
 
             # Create a new user using the NewUser model
             user = NewUser.objects.create_user(first_name=first_name, last_name=last_name, email=email,
-                                               password=password)
+                                               password=password) #, date_of_birth=date_of_birth
 
             # Log in the user after successful registration
             login(request, user)

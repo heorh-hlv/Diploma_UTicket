@@ -16,8 +16,8 @@ class NewUser(AbstractUser):
     # for authentication instead of usernames
     email = models.EmailField(_("email address"), unique=True)
 
-    # Add d_o_b field
-    date_of_birth = models.DateField()
+    # # Add d_o_b field
+    # date_of_birth = models.DateField(null=True)
 
     # Assign an instance of a custom manager
     objects = CustomUserManager()
@@ -37,7 +37,7 @@ class Tickets(models.Model):
     city_destination = models.TextField()
     departure_date = models.DateField()
     return_date = models.DateField()
-    amount_of_passengers = models.IntegerField()
+    #amount_of_passengers = models.IntegerField()
 
     # Travel settings
     plane_class = models.TextField()
