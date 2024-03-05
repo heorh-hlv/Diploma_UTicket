@@ -3,7 +3,7 @@
 
 <!-- ============  CHECK BOOKING  ============== -->
 <section class="cancel-booking section">
-   <form class="cancel-booking form">
+   <form class="cancel-booking form" method="POST">
       {% csrf_token %}
       <div class="form-chapter form-chapter-small">
          <div class="chapter__fields grid grid-template-columns-4">
@@ -23,14 +23,14 @@
          </div>
       </div>
    </form>
-
+{% if ticket %}
    <table class="table__booking-info table hidden" id="ticket-data">
       <caption clas  s="table-caption chapter__title">Інформація про квиток</caption>
 
       <tbody class="table-body">
          <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">ПІБ пасажира</td>
-            <td class="table-cell" role="cell">Кисельов Назар Олексійович</td>
+            <td class="table-cell" role="cell">Пасажир</td>
+            <td class="table-cell" role="cell">{{ ticket.first_name }} {{ ticket.last_name }}</td>
          </tr>
          <tr class="table-row" role="row">
             <td class="table-cell" role="cell">Дата і час вильоту</td>
@@ -58,6 +58,7 @@
          </tr>
       </tbody>
    </table>
+   {% endif %}
 </section>
 
 
