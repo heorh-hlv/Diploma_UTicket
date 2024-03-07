@@ -96,7 +96,7 @@ def check_page(request):
         ticket_id = request.POST.get("ticket-id")
 
         if not ticket_id:
-            return render(request, 'check_booking.html', {'error_': 'Please provide a valid ticket ID.'})
+            return render(request, 'check_booking.html', {'error_message': 'Please provide a valid ticket ID.'})
 
         ticket = get_object_or_404(Tickets, ticket_number=ticket_id, email=request.user)
 
