@@ -93,16 +93,21 @@ def cancel_page(request):
 @login_required
 def check_page(request):
     if request.method == "POST":
-        ticket_id = request.POST.get("ticket-id")
-
-        if not ticket_id:
-            return render(request, 'check_booking.html', {'error_message': 'Please provide a valid ticket ID.'})
-
-        ticket = get_object_or_404(Tickets, ticket_number=ticket_id, email=request.user)
-
-        return render(request, 'check_booking.html', {'ticket': ticket})
-
-    return render(request, 'check_booking.html')
+        ticket_number = request.POST.get("ticket_number")
+        try:
+            # Get the ticket object using the ticket_id
+            tickets = Tickets.objects.filter(ticket_number=ticket_number)
+            # Prepare data for the template
+            context = {
+                "tickets": tickets,
+            }
+            return render(request, "check_booking.html", context)
+        except Tickets.DoesNotExist:
+            # Handle case where ticket is not found
+            context = {"error": "Ticket not found"}
+            return render(request, "check_booking.html", context)
+    else:
+        return render(request, "check_booking.html")
 
 
 def login_view(request):

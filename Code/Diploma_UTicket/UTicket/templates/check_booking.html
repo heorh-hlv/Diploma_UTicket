@@ -9,56 +9,64 @@
          <div class="chapter__fields grid grid-template-columns-4">
             <div class="field chapter__field grid-field" tabindex="-1">
                <p class="field__title">ID квитка*</p>
-               <input type="text" id="ticket-id" class="chapter__input input__container " placeholder="111111111">
+               <input type="text" id="ticket_number" name="ticket_number" class="chapter__input input__container" placeholder="111111111">
                <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.
                </p>
             </div>
             <div class="field chapter__field grid-field" tabindex="-1">
                <p class="field__title invisible-text">submit-button</p>
                <button class="form__submit button-fill button-blue input__container chapter__button"
-                  id="check-booking-button">
+                  type="submit" id="check-booking-button">
                   Переглянути
                </button>
             </div>
          </div>
       </div>
    </form>
-{% if ticket %}
-   <table class="table__booking-info table hidden" id="ticket-data">
-      <caption clas  s="table-caption chapter__title">Інформація про квиток</caption>
+{% if error %}
+    <p>{{ error }}</p>
+{% else %}
+   {% if tickets %}
+      {% for ticket in tickets %}
+      <table class="table__booking-info table" id="ticket-data">
+         <caption class="table-caption chapter__title">Інформація про квиток</caption>
 
-      <tbody class="table-body">
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Пасажир</td>
-            <td class="table-cell" role="cell">{{ ticket.first_name }} {{ ticket.last_name }}</td>
-         </tr>
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Дата і час вильоту</td>
-            <td class="table-cell" role="cell">12 березня 2024, 15:30</td>
-         </tr>
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Місце вильоту</td>
-            <td class="table-cell" role="cell">Київ, Міжнародний аеропорт "Бориспіль" (KBP)</td>
-         </tr>
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Місто призначення</td>
-            <td class="table-cell" role="cell">Париж, Міжнародний аеропорт "Шарль де Голль" (CDG)</td>
-         </tr>
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Номер рейсу</td>
-            <td class="table-cell" role="cell">PS123</td>
-         </tr>
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Клас обслуговування</td>
-            <td class="table-cell" role="cell">Бізнес-клас</td>
-         </tr>
-         <tr class="table-row" role="row">
-            <td class="table-cell" role="cell">Номер місця</td>
-            <td class="table-cell" role="cell">22A</td>
-         </tr>
-      </tbody>
-   </table>
-   {% endif %}
+         <tbody class="table-body">
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Пасажир</td>
+               <td class="table-cell" role="cell">{{ ticket.first_name }} {{ ticket.second_name }}</td>
+            </tr>
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Дата і час вильоту</td>
+               <td class="table-cell" role="cell">{{ ticket.date_of_departure }}</td>
+            </tr>
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Місце вильоту</td>
+               <td class="table-cell" role="cell">{{ ticket.city_of_departure }}</td>
+            </tr>
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Місто призначення</td>
+               <td class="table-cell" role="cell">{{ ticket.city_destination }}</td>
+            </tr>
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Номер рейсу</td>
+               <td class="table-cell" role="cell">PS123</td>
+            </tr>
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Клас обслуговування</td>
+               <td class="table-cell" role="cell">{{ plane_class }}</td>
+            </tr>
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Номер місця</td>
+               <td class="table-cell" role="cell">22A</td>
+            </tr>
+         </tbody>
+      </table>
+      {% endfor %}
+   {% else %}
+        <p>No tickets found</p>
+    {% endif %}
+{% endif %}
 </section>
 
 

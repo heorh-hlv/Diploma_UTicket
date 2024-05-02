@@ -26,6 +26,7 @@ class NewUser(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+
     def __str__(self):
         return self.email
 
@@ -51,7 +52,7 @@ class Tickets(models.Model):
     phone_number = models.TextField()
 
     # Unique code
-    ticket_number = models.UUIDField(default=uuid4, editable=False, primary_key=False)
+    ticket_number = models.UUIDField(default=uuid4, editable=False, primary_key=True)
 
     # Connect tables
     email = models.ForeignKey(NewUser, on_delete=models.CASCADE)

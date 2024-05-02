@@ -240,8 +240,8 @@ if (passengersAmountInput) {
 }
 
 //? validate ticket id for booking cancelling
-const ticketIdRegex = /^\d{31}$/;
-const ticketIdInput = document.getElementById('ticket-id')
+const ticketIdRegex = /^.{32}$/;
+const ticketIdInput = document.getElementById('ticket_number')
 if (ticketIdInput) {
    ticketIdInput.addEventListener('focusout', (e) => {
       let enteredTicketId = e.target.value;

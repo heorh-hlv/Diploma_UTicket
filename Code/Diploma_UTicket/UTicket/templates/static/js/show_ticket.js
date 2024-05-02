@@ -1,4 +1,4 @@
-﻿const showTicketForm = document.getElementById('ticket-id').closest('form');
+﻿const showTicketForm = document.getElementById('ticket_number').closest('form');
 const ticketData = document.getElementById('ticket-data');
 
 console.log(showTicketForm)
