@@ -418,6 +418,7 @@ button {
    transition: all .3s ease-in-out;
    opacity: 0;
    pointer-events: none;
+   min-width: 250px;
 }
 
 .menu__item:last-of-type:hover .menu__sublist {

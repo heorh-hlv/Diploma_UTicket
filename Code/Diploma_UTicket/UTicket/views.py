@@ -9,88 +9,42 @@ from django.contrib.auth import logout
 
 
 def home_page(request):
+    # if request.user.is_authenticated:
+    #     try:
+    #         ticket = Tickets.objects.get(email=request.user)
+    #         ticket_number = ticket.ticket_number
+    #     except Tickets.DoesNotExist:
+    #         ticket_number = None
+    # else:
+    #     ticket_number = None
+    #
+    # context = {
+    #     'ticket_number': ticket_number
+    # }
     return render(request, 'index.html')
 
-@login_required
+
+from .forms import BookingForm
+@login_required(login_url='login_view')
 def booking_page(request):
     if request.method == "POST":
-        city_of_departure = request.POST.get("city_of_departure")
-        city_destination = request.POST.get("city_destination")
-        departure_date = request.POST.get("departure_date")
-        return_date = request.POST.get("return_date")
-        #amount_of_passengers = request.POST.get("amount_of_passengers")
-
-        # Travel settings
-        plane_class = request.POST.get("plane_class")
-        flight_departure = request.POST.get("flight_departure")
-        plane_place = request.POST.get("plane_place")
-
-        # Passenger data
-        first_name = request.POST.get("first_name")
-        second_name = request.POST.get("second_name")
-        date_of_birth = request.POST.get("date_of_birth")
-        phone_number = request.POST.get("phone_number")
-
-        # Generate unique ticket
-        #ticket_number = str(uuid4())
-
-        # Connect tables
-        #email = request.POST.get("email")
-
-
-        if city_of_departure is None:
-            return HttpResponse("<h3>Введіть city_of_departure</h3>")
-        elif city_destination is None:
-            return HttpResponse("<h3>Введіть city_destination</h3>")
-        elif departure_date is None:
-            return HttpResponse("<h3>Введіть departure_date</h3>")
-        elif return_date is None:
-            return HttpResponse("<h3>Введіть return_date</h3>")
-
-        elif plane_class is None:
-            return HttpResponse("<h3>Введіть plane_class</h3>")
-        elif flight_departure is None:
-            return HttpResponse("<h3>Введіть flight_departure/h3>")
-        elif plane_place is None:
-            return HttpResponse("<h3>Введіть plane_place</h3>")
-
-        elif first_name is None:
-            return HttpResponse("<h3>Введіть first_name</h3>")
-        elif second_name is None:
-            return HttpResponse("<h3>Введіть second_name</h3>")
-        elif date_of_birth is None:
-            return HttpResponse("<h3>Введіть date_of_birth</h3>")
-        elif phone_number is None:
-            return HttpResponse("<h3>Введіть phone_number</h3>")
-
-        # elif ticket_number is None:
-        #     return HttpResponse("<h3>Введіть ticketnumber</h3>")
-
-        # elif email is None:
-        #     return HttpResponse("<h3>Введіть email</h3>")
-
-
-        else:
-            user_instance = get_object_or_404(NewUser, email=request.user.email)
-
-            ticket = Tickets.objects.create(city_of_departure=city_of_departure, city_destination=city_destination,
-                                          departure_date=departure_date, return_date=return_date,
-                                          plane_class=plane_class,
-                                          flight_departure=flight_departure, plane_place=plane_place,
-                                          first_name=first_name, second_name=second_name, date_of_birth=date_of_birth,
-                                          phone_number=phone_number,  email=user_instance) #ticket_number=ticket_number,
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.email = request.user
             ticket.save()
-
             return redirect('index')
-    return render(request, 'booking.html')
+    else:
+        form = BookingForm()
+    return render(request, 'booking.html', {'form': form})
 
 
-@login_required
+@login_required(login_url='login_view')
 def cancel_page(request):
     return render(request, 'cancel_booking.html')
 
 
-@login_required
+@login_required(login_url='login_view')
 def check_page(request):
     if request.method == "POST":
         ticket_number = request.POST.get("ticket_number")
@@ -133,7 +87,6 @@ def signup(request):
         last_name = request.POST.get('last_name')
         email = request.POST.get("email")
         password = request.POST.get("password")
-        date_of_birth = request.POST.get("date-of-birth")
 
         # Validate input fields
         if first_name is None:
@@ -144,8 +97,6 @@ def signup(request):
             return HttpResponse("<h3>Введіть пошту</h3>")
         elif password is None:
             return HttpResponse("<h3>Введіть пароль</h3>")
-        # elif date_of_birth is None:
-        #     return HttpResponse("<h3>Введіть дату народження</h3>")
         else:
 
             # Create a new user using the NewUser model
@@ -173,18 +124,3 @@ def change_user(request):
     logout(request)
     return redirect('login_view')
 
-
-
-# @login_required
-# def add_note(request):
-#     if request.method == 'POST':
-#         note_text = request.POST['note-text']
-#         if note_text:
-#             Note.objects.create(user=request.user, text=note_text)
-#             return redirect('add_note')  # Возвращаемся на страницу добавления заметки
-#     return render(request, 'add_note.html')  # Показываем страницу добавления заметки
-#
-# @login_required
-# def notes(request):
-#     user_notes = Note.objects.filter(user=request.user)
-#     return render(request, 'notes.html', {'user_notes': user_notes})

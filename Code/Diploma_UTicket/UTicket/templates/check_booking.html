@@ -37,8 +37,8 @@
                <td class="table-cell" role="cell">{{ ticket.first_name }} {{ ticket.second_name }}</td>
             </tr>
             <tr class="table-row" role="row">
-               <td class="table-cell" role="cell">Дата і час вильоту</td>
-               <td class="table-cell" role="cell">{{ ticket.date_of_departure }}</td>
+               <td class="table-cell" role="cell">Дата вильоту</td>
+               <td class="table-cell" role="cell">{{ ticket.departure_date }}</td>
             </tr>
             <tr class="table-row" role="row">
                <td class="table-cell" role="cell">Місце вильоту</td>
@@ -49,16 +49,16 @@
                <td class="table-cell" role="cell">{{ ticket.city_destination }}</td>
             </tr>
             <tr class="table-row" role="row">
-               <td class="table-cell" role="cell">Номер рейсу</td>
-               <td class="table-cell" role="cell">PS123</td>
+               <td class="table-cell" role="cell">Відправлення</td>
+               <td class="table-cell" role="cell">{{ ticket.flight_departure }}</td>
             </tr>
             <tr class="table-row" role="row">
                <td class="table-cell" role="cell">Клас обслуговування</td>
-               <td class="table-cell" role="cell">{{ plane_class }}</td>
+               <td class="table-cell" role="cell">{{ ticket.plane_class }}</td>
             </tr>
             <tr class="table-row" role="row">
                <td class="table-cell" role="cell">Номер місця</td>
-               <td class="table-cell" role="cell">22A</td>
+               <td class="table-cell" role="cell">{{ ticket.plane_place }}</td>
             </tr>
          </tbody>
       </table>

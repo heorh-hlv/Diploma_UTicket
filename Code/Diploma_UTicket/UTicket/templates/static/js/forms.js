@@ -161,8 +161,8 @@ if (dropdownDepartureCity && dropdownDestinationCity) {
 }
 
 //? validate dates
-const departureDateInput = document.getElementById('departure-date')
-const returnDateInput = document.getElementById('return-date')
+const departureDateInput = document.getElementById('departure_date')
+const returnDateInput = document.getElementById('return_date')
 
 if (departureDateInput && returnDateInput) {
    departureDateInput.value = '';
@@ -209,35 +209,35 @@ function getDateAfterNYearsFromDate(inputDate, n) {
 }
 
 
-//? validate the amout of passengers input
-const passengersAmountInput = document.getElementById('amount-of-passengers') ? document.getElementById('amount-of-passengers') : null;
-if (passengersAmountInput) {
-   passengersAmountInput.addEventListener('input', (e) => {
-      const inputValue = e.target.value;
-
-      //? use a regular expression to check if the input contains anything except numbers
-      const regex = /[^0-9]/g;
-      const containsNonNumericCharacters = regex.test(inputValue);
-      const fieldError = e.target.parentElement.parentElement.querySelector('#form-field-error')
-      if (containsNonNumericCharacters) {
-         fieldError.innerText = 'Невалідний формат.';
-         fieldError.classList.remove('hidden')
-         fieldError.classList.add('show')
-      } else if (inputValue > 10) {
-         fieldError.innerText = 'Не більше 10 пасажирів.';
-         fieldError.classList.remove('hidden')
-         fieldError.classList.add('show')
-      } else if (inputValue < 1) {
-         fieldError.innerText = 'Не менше 1 пасажира.';
-         fieldError.classList.remove('hidden')
-         fieldError.classList.add('show')
-      } else {
-         fieldError.innerText = 'Це поле має бути заповнене.';
-         fieldError.classList.add('hidden')
-         fieldError.classList.remove('show')
-      }
-   })
-}
+////? validate the amout of passengers input
+//const passengersAmountInput = document.getElementById('amount-of-passengers') ? document.getElementById('amount-of-passengers') : null;
+//if (passengersAmountInput) {
+//   passengersAmountInput.addEventListener('input', (e) => {
+//      const inputValue = e.target.value;
+//
+//      //? use a regular expression to check if the input contains anything except numbers
+//      const regex = /[^0-9]/g;
+//      const containsNonNumericCharacters = regex.test(inputValue);
+//      const fieldError = e.target.parentElement.parentElement.querySelector('#form-field-error')
+//      if (containsNonNumericCharacters) {
+//         fieldError.innerText = 'Невалідний формат.';
+//         fieldError.classList.remove('hidden')
+//         fieldError.classList.add('show')
+//      } else if (inputValue > 10) {
+//         fieldError.innerText = 'Не більше 10 пасажирів.';
+//         fieldError.classList.remove('hidden')
+//         fieldError.classList.add('show')
+//      } else if (inputValue < 1) {
+//         fieldError.innerText = 'Не менше 1 пасажира.';
+//         fieldError.classList.remove('hidden')
+//         fieldError.classList.add('show')
+//      } else {
+//         fieldError.innerText = 'Це поле має бути заповнене.';
+//         fieldError.classList.add('hidden')
+//         fieldError.classList.remove('show')
+//      }
+//   })
+//}
 
 //? validate ticket id for booking cancelling
 const ticketIdRegex = /^.{32}$/;
