@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .models import NewUser, Tickets
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.core.mail import send_mail
+from django.conf import settings
 #from uuid import uuid4
 # Create your views here.
 
@@ -33,6 +35,15 @@ def booking_page(request):
             ticket = form.save(commit=False)
             ticket.email = request.user
             ticket.save()
+            # subject = 'Успішна покупка'
+            # message = f'''
+            # Вітаю, {ticket.first_name}!
+            # Ми дякуємо вам за покупку білета на нашому сайті. Номер вашого білета - {ticket.ticket_number}.
+            # Ви можете перевірити всю доступну інформацію на нашому сайті у розділі "Подивитися білет"
+            # '''
+            # email_from = settings.EMAIL_HOST_USER
+            # recipient_list = [ticket.email, ]
+            # send_mail(subject, message, email_from, recipient_list)
             return redirect('index')
     else:
         form = BookingForm()
