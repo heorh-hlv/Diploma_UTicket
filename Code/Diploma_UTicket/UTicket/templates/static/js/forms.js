@@ -240,7 +240,7 @@ function getDateAfterNYearsFromDate(inputDate, n) {
 //}
 
 //? validate ticket id for booking cancelling
-const ticketIdRegex = /^.{32}$/;
+const ticketIdRegex = /^.{10}$/;
 const ticketIdInput = document.getElementById('ticket_number')
 if (ticketIdInput) {
    ticketIdInput.addEventListener('focusout', (e) => {

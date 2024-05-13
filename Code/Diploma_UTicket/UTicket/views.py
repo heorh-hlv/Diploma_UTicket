@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import NewUser, Tickets
@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.core.mail import send_mail
 from django.conf import settings
-#from uuid import uuid4
+from .forms import BookingForm
+# from uuid import uuid4
 # Create your views here.
 
 
@@ -26,7 +27,6 @@ def home_page(request):
     return render(request, 'index.html')
 
 
-from .forms import BookingForm
 @login_required(login_url='login_view')
 def booking_page(request):
     if request.method == "POST":
@@ -35,15 +35,17 @@ def booking_page(request):
             ticket = form.save(commit=False)
             ticket.email = request.user
             ticket.save()
-            # subject = 'Успішна покупка'
-            # message = f'''
-            # Вітаю, {ticket.first_name}!
-            # Ми дякуємо вам за покупку білета на нашому сайті. Номер вашого білета - {ticket.ticket_number}.
-            # Ви можете перевірити всю доступну інформацію на нашому сайті у розділі "Подивитися білет"
-            # '''
-            # email_from = settings.EMAIL_HOST_USER
-            # recipient_list = [ticket.email, ]
-            # send_mail(subject, message, email_from, recipient_list)
+
+            subject = 'Успішна покупка'
+            message = f'''
+            Вітаю, {ticket.first_name}!
+            Ми дякуємо вам за покупку білета на нашому сайті. Номер вашого білета - {ticket.ticket_number}.
+            Ви можете перевірити всю доступну інформацію на нашому сайті у розділі "Подивитися білет"
+            '''
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [ticket.email, ]
+            send_mail(subject, message, email_from, recipient_list)
+
             return redirect('index')
     else:
         form = BookingForm()
@@ -62,6 +64,7 @@ def check_page(request):
         try:
             # Get the ticket object using the ticket_id
             tickets = Tickets.objects.filter(ticket_number=ticket_number)
+            print(tickets)
             # Prepare data for the template
             context = {
                 "tickets": tickets,
@@ -112,7 +115,7 @@ def signup(request):
 
             # Create a new user using the NewUser model
             user = NewUser.objects.create_user(first_name=first_name, last_name=last_name, email=email,
-                                               password=password) #, date_of_birth=date_of_birth
+                                               password=password)
 
             # Log in the user after successful registration
             login(request, user)
@@ -124,14 +127,15 @@ def signup(request):
     return render(request, 'signup.html')
 
 
-@login_required
+@login_required(login_url='login_view')
 def logout_view(request):
     logout(request)
     return redirect('/')
 
 
-@login_required
+@login_required(login_url='login_view')
 def change_user(request):
     logout(request)
     return redirect('login_view')
+
 

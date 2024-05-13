@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as __
 
 from .managers import CustomUserManager
 from uuid import uuid4
+
+import secrets
+import string
+
+
+def generate_short_ticket_id(length=10):
+    characters = string.ascii_letters + string.digits
+    return ''.join(secrets.choice(characters) for _ in range(length))
 
 # Create your models here.
 
@@ -14,7 +22,7 @@ class NewUser(AbstractUser):
 
     ''' Add email field as unique identifiers
     for authentication instead of usernames '''
-    email = models.EmailField(_("email address"), unique=True)
+    email = models.EmailField(__("email address"), unique=True)
 
     # # Add d_o_b field
     # date_of_birth = models.DateField(null=True)
@@ -52,7 +60,8 @@ class Tickets(models.Model):
     phone_number = models.TextField()
 
     # Unique code
-    ticket_number = models.UUIDField(default=uuid4, editable=False, primary_key=True)
+    ticket_number = models.CharField(max_length=10, unique=True, default=generate_short_ticket_id)
+
 
     # Connect tables
     email = models.ForeignKey(NewUser, on_delete=models.CASCADE)
