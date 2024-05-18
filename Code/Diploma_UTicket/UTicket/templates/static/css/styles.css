@@ -19,6 +19,11 @@
    --clr-red: #E9747B;
    --clr-red-hover: #E06E75;
    --clr-red-active: #D6686F;
+
+/*   --clr-purple: #9B59B6;
+   --clr-purple-hover: #8E49A4;
+   --clr-purple-active: #7D3B8E;*/
+
    --clr-text-white: #fff;
    --clr-text-black: #000;
    --clr-text-grey-1: #353535;
@@ -195,6 +200,10 @@ button {
    align-content: center;
 }
 
+.grid-template-columns-2 {
+   grid-template-columns: repeat(2, 1fr);
+}
+
 .grid-template-columns-3 {
    grid-template-columns: repeat(3, 1fr);
 }
@@ -261,6 +270,16 @@ button {
 .button-blue:active {
    background-color: var(--clr-blue-active);
 }
+
+/*.button-purple {
+   background-color: var(--clr-purple);
+}
+.button-purple:hover {
+   background-color: var(--clr-purple-hover);
+}
+.button-purple:active {
+   background-color: var(--clr-purple-active);
+}*/
 
 .hidden {
    display: none;
@@ -499,6 +518,10 @@ button {
 
 .home__button.button-red:hover {
    box-shadow: 0 2px 12px 0 rgb(233, 116, 123);
+}
+
+.home__button.button-purple:hover {
+   box-shadow: 0 2px 12px 0 rgb(128,0,128);
 }
 
 /* =================  FOOTER  ============== */

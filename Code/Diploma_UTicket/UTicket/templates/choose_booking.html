@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+   <!-- ============  MAIN  ============== -->
+   <main class="main">
+      <div class="wrapper">
+         <!-- ============  HOME  ============== -->
+         <section class="home section">
+            <div class="home__container">
+               <div class="home__cards grid grid-template-columns-2">
+                  <div class="home__card flex">
+                     <i class="ri-train-line home__icon"></i>
+                     <a href="{% url 'booking_train' %}" class="home__button button-fill button-green">Поїзд</a>
+                  </div>
+                  <div class="home__card flex">
+                     <i class="ri-plane-line home__icon"></i>
+                     <a href="" class="home__button button-fill button-blue">Літак</a>
+               </div>
+            </div>
+         </section>
+      </div>
+   </main>
+
+{% endblock %}

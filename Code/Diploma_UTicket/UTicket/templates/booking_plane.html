@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ============  BOOKING  ============== -->
+<section class="booking section">
+   <form action="" class="booking__form form" method="post">
+      {% csrf_token %}
+      <!-- Travel details chapter -->
+      <div class="form-chapter">
+         <h1 class="chapter__title">
+            Деталі подорожі
+         </h1>
+         <div class="chapter__fields grid grid-template-columns-4">
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Місто відправлення*</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="city-of-departure" name="city_of_departure">
+                  <span class="selected-display">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">Київ</li>
+                     <li class="dropdown-item">Дніпро</li>
+                     <li class="dropdown-item">Харків</li>
+                     <li class="dropdown-item">Львів</li>
+                  </ul>
+               </div>
+               <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Місто призначення*</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="city-destination" name="city_destination">
+                  <span class="selected-display" id="destination">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">Київ</li>
+                     <li class="dropdown-item">Дніпро</li>
+                     <li class="dropdown-item">Харків</li>
+                     <li class="dropdown-item">Львів</li>
+                  </ul>
+               </div>
+               <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Дата відправлення*</p>
+               <div class="chapter__field__input-with-icon">
+                  <input type="date" class="chapter__input input__container input-date" id="departure_date"
+                     min="1900-12-31" name="departure_date">
+               </div>
+               <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Дата повернення</p>
+               <div class="chapter__field__input-with-icon">
+                  <input type="date" class="chapter__input input__container input-date" id="return_date"
+                     min="1900-12-31" name="return_date">
+               </div>
+            </div>
+            <!--<div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Кількість пасажирів (макс. 10)</p>
+               <div class="chapter__field__input-with-icon">
+                  <input type="text" class="chapter__input input__container"  id="amount-of-passengers" min="1" max="10"
+                     value="1" name="amount_of_passengers">
+               </div>
+               <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div> -->
+         </div>
+      </div>
+
+      <!-- Travel settings chapter -->
+      <div class="form-chapter">
+         <h1 class="chapter__title">
+            Налаштування
+         </h1>
+         <div class="chapter__fields grid grid-template-columns-4">
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Клас</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="plane-class" name="plane_class">
+                  <span class="selected-display">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">Стандарт</li>
+                     <li class="dropdown-item">Бізнес</li>
+                     <li class="dropdown-item">Люкс</li>
+                  </ul>
+               </div>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Рейс відправлення</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="flight-departure" name="flight_departure">
+                  <span class="selected-display">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">18:00</li>
+                     <li class="dropdown-item">19:00</li>
+                     <li class="dropdown-item">20:00</li>
+                  </ul>
+               </div>
+            </div>
+            <div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Місце</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="plane-place" name="plane_place">
+                  <span class="selected-display">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">У вікна</li>
+                     <li class="dropdown-item">У прохода</li>
+                     <li class="dropdown-item">Без побажань</li>
+                  </ul>
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+      <!-- Contacts and data about client chapter -->
+      <div class="form-chapter">
+         <h1 class="chapter__title">
+            Контакти та дані
+         </h1>
+         <div class="chapter__fields grid grid-template-columns-4">
+            <div class="field chapter__field grid-field" tabindex="-1">
+                <p class="field__title">Ваше ім’я*</p>
+                <input type="text" class="chapter__input input__container" placeholder="Ім'я" name="first_name"
+                       value="{{ request.user.first_name }}">
+                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+
+            <div class="field chapter__field grid-field" tabindex="-1">
+                <p class="field-title">Ваше прізвище*</p>
+                <input type="text" class="chapter__input input__container" placeholder="Прізвище" name="second_name"
+                       value="{{ request.user.last_name }}">
+                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+
+            <div class="field chapter__field grid-field" tabindex="-1">
+                <p class="field-title">Дата народженя*</p>
+                <div class="log-form__input-with-icon">
+                    <input type="date" class="chapter__input input__container input-date input-birthday"
+                           id="date-of-birth" name="date_of_birth"
+                           value="{{ request.user.date_of_birth }}">
+                </div>
+                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+
+            <div class="field chapter__field grid-field" tabindex="-1">
+                <p class="field-title">Тел. номер*</p>
+                <input type="tel" class="chapter__input input__container" placeholder="+380 95 159 45 68"
+                       pattern="(\+380|0)[0-9]{9}" name="phone_number">
+                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+
+            <div class="field chapter__field grid-field" tabindex="-1">
+                <p class="field-title">Ваш email*</p>
+                <input type="email" class="chapter__input input__container" placeholder="Email" id="email"
+                       name="email" value="{{ request.user.email }}">
+                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div>
+         </div>
+      </div>
+      <button class="form__submit button-fill button-green input__container" type="submit">
+         Забронювати
+      </button>
+   </form>
+</section>
+
+<!-- scripts -->
+<script src="static/js/forms.js"></script>
+{% endblock %}

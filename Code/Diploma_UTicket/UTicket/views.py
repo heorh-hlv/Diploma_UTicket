@@ -7,9 +7,10 @@ from django.contrib.auth import logout
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import BookingForm
-# from uuid import uuid4
-# Create your views here.
+from django.template.loader import render_to_string
 
+
+# Create your views here.
 
 def home_page(request):
     # if request.user.is_authenticated:
@@ -28,28 +29,74 @@ def home_page(request):
 
 
 @login_required(login_url='login_view')
-def booking_page(request):
+def choose_booking(request):
+    return render(request, 'choose_booking.html')
+
+
+@login_required(login_url='login_view')
+def booking_train(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
             ticket = form.save(commit=False)
-            ticket.email = request.user
+            ticket.email = request.user.email
             ticket.save()
-
-            subject = 'Успішна покупка'
-            message = f'''
-            Вітаю, {ticket.first_name}!
-            Ми дякуємо вам за покупку білета на нашому сайті. Номер вашого білета - {ticket.ticket_number}.
-            Ви можете перевірити всю доступну інформацію на нашому сайті у розділі "Подивитися білет"
-            '''
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [ticket.email, ]
-            send_mail(subject, message, email_from, recipient_list)
+            print("Success")
+            send_booking_email(ticket)
 
             return redirect('index')
+        else:
+            print("Form is not valid")
+            print(form.errors)
     else:
         form = BookingForm()
-    return render(request, 'booking.html', {'form': form})
+    return render(request, 'booking_train.html', {'form': form})
+
+
+# @login_required(login_url='login_view')
+# def booking_plane(request):
+#     if request.method == "POST":
+#         form = BookingForm(request.POST)
+#         if form.is_valid():
+#             ticket = form.save(commit=False)
+#             ticket.email = request.user
+#             ticket.save()
+#
+#             send_booking_email(ticket)
+#
+#             return redirect('index')
+#     else:
+#         form = BookingForm()
+#     return render(request, 'booking_plane.html', {'form': form})
+
+
+def send_booking_email(ticket):
+    subject = 'Успішна покупка'
+    email_template_name = 'email_confirmation.html'
+    context = {'ticket': ticket}
+
+    email_html_message = render_to_string(email_template_name, context)
+
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [ticket.email, ]
+    send_mail(subject, '', email_from, recipient_list, html_message=email_html_message)
+
+
+# @login_required(login_url='login_view')
+# def booking_page(request):
+#     if request.method == "POST":
+#         form = BookingForm(request.POST)
+#         if form.is_valid():
+#             ticket = form.save(commit=False)
+#             ticket.email = request.user
+#             ticket.save()
+#
+#             send_booking_email(ticket)
+#
+#             return redirect('index')
+#     else:
+#         form = BookingForm()
+#     return render(request, 'booking.html', {'form': form})
 
 
 @login_required(login_url='login_view')
@@ -64,7 +111,7 @@ def check_page(request):
         try:
             # Get the ticket object using the ticket_id
             tickets = Tickets.objects.filter(ticket_number=ticket_number)
-            print(tickets)
+
             # Prepare data for the template
             context = {
                 "tickets": tickets,
@@ -72,7 +119,7 @@ def check_page(request):
             return render(request, "check_booking.html", context)
         except Tickets.DoesNotExist:
             # Handle case where ticket is not found
-            context = {"error": "Ticket not found"}
+            context = {"error": "Білет не знайдено"}
             return render(request, "check_booking.html", context)
     else:
         return render(request, "check_booking.html")
@@ -87,7 +134,7 @@ def login_view(request):
             login(request, user)
             return redirect('index')
         else:
-            messages.error(request, "Неверный адрес электронной почты или пароль.")
+            messages.error(request, "Неправильна пошта або пароль.")
     return render(request, 'login.html')
 
 

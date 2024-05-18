@@ -1,10 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as __
-
 from .managers import CustomUserManager
-from uuid import uuid4
-
 import secrets
 import string
 
@@ -24,9 +21,6 @@ class NewUser(AbstractUser):
     for authentication instead of usernames '''
     email = models.EmailField(__("email address"), unique=True)
 
-    # # Add d_o_b field
-    # date_of_birth = models.DateField(null=True)
-
     # Assign an instance of a custom manager
     objects = CustomUserManager()
 
@@ -39,25 +33,41 @@ class NewUser(AbstractUser):
         return self.email
 
 
+class City(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Departure(models.Model):
+
+    departure_time = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.departure_time
+
+
 class Tickets(models.Model):
 
     # Travel details
-    city_of_departure = models.TextField()
-    city_destination = models.TextField()
+    city_of_departure = models.ForeignKey(City, related_name='departures', on_delete=models.CASCADE)
+    city_destination = models.ForeignKey(City, related_name='destinations', on_delete=models.CASCADE)
     departure_date = models.DateField()
-    return_date = models.DateField()
-    #amount_of_passengers = models.IntegerField()
+
+    # return_date = models.DateField()
+    # amount_of_passengers = models.IntegerField()
 
     # Travel settings
-    plane_class = models.TextField()
-    flight_departure = models.TextField()
-    plane_place = models.TextField()
+    plane_class = models.TextField(max_length=30)
+    flight_departure = models.ForeignKey(Departure, on_delete=models.CASCADE)
+    plane_place = models.TextField(max_length=30)
 
     # Passenger data
-    first_name = models.TextField()
-    second_name = models.TextField()
-    date_of_birth = models.TextField()
-    phone_number = models.TextField()
+    first_name = models.TextField(max_length=40)
+    second_name = models.TextField(max_length=40)
+    date_of_birth = models.TextField(max_length=10)
+    phone_number = models.TextField(max_length=20)
 
     # Unique code
     ticket_number = models.CharField(max_length=10, unique=True, default=generate_short_ticket_id)
@@ -65,3 +75,11 @@ class Tickets(models.Model):
 
     # Connect tables
     email = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Client {self.first_name} {self.email} "
+
+
+# models.py
