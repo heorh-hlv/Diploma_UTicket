@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewUser, Tickets, City, Departure
+from .models import NewUser, Tickets
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -9,5 +9,3 @@ class UserAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(NewUser)
 admin.site.register(Tickets)
-admin.site.register(City)
-admin.site.register(Departure)

@@ -88,7 +88,7 @@ validateUnfilledForm(fields)
 //? Validation form for unfilled fields
 function validateUnfilledForm(formFields) {
    formFields.forEach(field => {
-      if (!field.querySelector('.error')) return //? skip iteration if a field is not required (does not contain prepared error message 
+      if (!field.querySelector('.error')) return //? skip iteration if a field is not required (does not contain prepared error message
       const fieldError = field.querySelector('.error')
       field.addEventListener('focusout', (e) => {
          if (field.querySelector('input').value === '') {
@@ -134,52 +134,55 @@ form.addEventListener('submit', (e) => {
 //? validate cities
 const dropdownDepartureCity = document.querySelector('input#city-of-departure') ? document.querySelector('input#city-of-departure').closest('.wrapper-dropdown') : null;
 const dropdownDestinationCity = document.querySelector('input#city-destination') ? document.querySelector('input#city-destination').closest('.wrapper-dropdown') : null;
-let chosenCity = '';
+var chosenCity = '';
 
-// Disable Destination City dropdown menu before departure city is chosen
+//? disable Destination City dropdown menu before departure city is chosen
 if (dropdownDepartureCity && dropdownDestinationCity) {
-    dropdownDestinationCity.classList.add('disable');
-    const departureCityOptionsList = dropdownDepartureCity.querySelectorAll("li");
-    const destinationCityOptionsList = dropdownDestinationCity.querySelectorAll("li");
+   dropdownDestinationCity.classList.add('disable');
+   const departureCityOptionsList = dropdownDepartureCity.querySelectorAll("li");
+   const destinationCityOptionsList = dropdownDestinationCity.querySelectorAll("li");
 
-    // Update the display of the dropdown
-    for (let option of departureCityOptionsList) {
-        option.addEventListener("click", () => {
-            chosenCity = option.getAttribute('data-value');
-            document.querySelector('#city-of-departure').value = chosenCity;
-            dropdownDepartureCity.querySelector('.selected-display').innerHTML = chosenCity;
-            destinationCityOptionsList.forEach(city => {
-                if (city.getAttribute('data-value') === chosenCity) {
-                    city.classList.add('hidden');
-                } else {
-                    city.classList.remove('hidden');
-                }
-            });
-            dropdownDestinationCity.querySelector('.selected-display').innerHTML = 'Не обрано';
-            dropdownDestinationCity.querySelector('input').value = '';
-            dropdownDestinationCity.classList.remove('disable');
-        });
-    }
-
-    for (let option of destinationCityOptionsList) {
-        option.addEventListener("click", () => {
-            const selectedCity = option.getAttribute('data-value');
-            document.querySelector('#city-destination').value = selectedCity;
-            dropdownDestinationCity.querySelector('.selected-display').innerHTML = selectedCity;
-        });
-    }
+   //? update the display of the dropdown
+   for (let option of departureCityOptionsList) {
+      option.addEventListener("click", () => {
+         chosenCity = option.innerHTML;
+         destinationCityOptionsList.forEach(city => {
+            if (city.innerHTML === chosenCity) {
+               city.classList.add('hidden')
+            } else {
+               city.classList.remove('hidden')
+            }
+         })
+         dropdownDestinationCity.querySelector('#destination').innerHTML = 'Не обрано';
+         dropdownDestinationCity.querySelector('input').value = '';
+         dropdownDestinationCity.classList.remove('disable');
+      });
+   }
 }
 
-////? validate dates
+//? validate dates
+const departureDateInput = document.getElementById('departure_date')
+
+
+if (departureDateInput ) {
+   departureDateInput.value = '';
+   var chosenDepartureDate = '';
+
+   //? set the minimum departure date to current date
+   departureDateInput.min = new Date().toISOString().split('T')[0];
+   departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
+
+}
+
+////? validate dates2
 //const departureDateInput = document.getElementById('departure_date')
 //const returnDateInput = document.getElementById('return_date')
-//
 //if (departureDateInput && returnDateInput) {
 //   departureDateInput.value = '';
 //   returnDateInput.value = '';
 //   var chosenDepartureDate = '';
 //
-//   //? disable returnDateInput  before departure date is chosen
+//   ? disable returnDateInput  before departure date is chosen
 //   returnDateInput.classList.add('disable');
 //
 //   //? set the minimum departure date to current date
@@ -193,31 +196,30 @@ if (dropdownDepartureCity && dropdownDestinationCity) {
 //      returnDateInput.max = getDateAfterNYearsFromDate(new Date(departureDateInput.value), 1);;
 //   })
 //}
-//
-//function getDateAfterNYearsFromDate(inputDate, n) {
-//   if (typeof n !== 'number' || n < 0) {
-//      throw new Error('Invalid input for the number of years. Please provide a positive number of years.');
-//   }
-//   if (!(inputDate instanceof Date)) {
-//      throw new Error('Invalid input date. Please provide a valid Date object.');
-//   }
-//   //? create a copy of the input date
-//   const dateCopy = new Date(inputDate);
-//
-//   //? add n years to the copied date
-//   dateCopy.setFullYear(dateCopy.getFullYear() + n);
-//
-//   //? extract year, month, and day components
-//   const year = dateCopy.getFullYear();
-//   const month = (dateCopy.getMonth() + 1).toString().padStart(2, '0');
-//   const day = dateCopy.getDate().toString().padStart(2, '0');
-//
-//   //? format the date as "yyyy-mm-dd"
-//   const formattedDate = `${year}-${month}-${day}`;
-//
-//   return formattedDate;
-//}
 
+function getDateAfterNYearsFromDate(inputDate, n) {
+   if (typeof n !== 'number' || n < 0) {
+      throw new Error('Invalid input for the number of years. Please provide a positive number of years.');
+   }
+   if (!(inputDate instanceof Date)) {
+      throw new Error('Invalid input date. Please provide a valid Date object.');
+   }
+   //? create a copy of the input date
+   const dateCopy = new Date(inputDate);
+
+   //? add n years to the copied date
+   dateCopy.setFullYear(dateCopy.getFullYear() + n);
+
+   //? extract year, month, and day components
+   const year = dateCopy.getFullYear();
+   const month = (dateCopy.getMonth() + 1).toString().padStart(2, '0');
+   const day = dateCopy.getDate().toString().padStart(2, '0');
+
+   //? format the date as "yyyy-mm-dd"
+   const formattedDate = `${year}-${month}-${day}`;
+
+   return formattedDate;
+}
 
 ////? validate the amout of passengers input
 //const passengersAmountInput = document.getElementById('amount-of-passengers') ? document.getElementById('amount-of-passengers') : null;

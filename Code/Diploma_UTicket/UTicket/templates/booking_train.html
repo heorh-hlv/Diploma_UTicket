@@ -12,31 +12,33 @@
          </h1>
          <div class="chapter__fields grid grid-template-columns-4">
             <div class="field chapter__field grid-field" tabindex="-1">
-               <p class="field-title">{{ form.city_of_departure.label }}</p>
-                 <div class="chapter__input wrapper-dropdown input__container">
-                     <input type="text" class="hidden" id="city-of-departure" name="city_of_departure">
-                     <span class="selected-display">Не обрано</span>
-                     <i class="ri-arrow-down-s-fill arrow"></i>
-                     <ul class="dropdown">
-                         {% for city in form.city_of_departure.field.queryset %}
-                             <li class="dropdown-item" data-value="{{ city.name }}">{{ city.name }}</li>
-                         {% endfor %}
-                     </ul>
-                 </div>
+               <p class="field-title">Місто відправлення*</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="city-of-departure" name="city_of_departure">
+                  <span class="selected-display">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">Київ</li>
+                     <li class="dropdown-item">Дніпро</li>
+                     <li class="dropdown-item">Харків</li>
+                     <li class="dropdown-item">Львів</li>
+                  </ul>
+               </div>
                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
             </div>
             <div class="field chapter__field grid-field" tabindex="-1">
-               <p class="field-title">{{ form.city_destination.label }}</p>
-                 <div class="chapter__input wrapper-dropdown input__container">
-                     <input type="text" class="hidden" id="city-destination" name="city_destination">
-                     <span class="selected-display">Не обрано</span>
-                     <i class="ri-arrow-down-s-fill arrow"></i>
-                     <ul class="dropdown">
-                         {% for city in form.city_destination.field.queryset %}
-                             <li class="dropdown-item" data-value="{{ city.name }}">{{ city.name }}</li>
-                         {% endfor %}
-                     </ul>
-                 </div>
+               <p class="field-title">Місто призначення*</p>
+               <div class="chapter__input wrapper-dropdown input__container">
+                  <input type="text" class="hidden" id="city-destination" name="city_destination">
+                  <span class="selected-display" id="destination">Не обрано</span>
+                  <i class="ri-arrow-down-s-fill arrow"></i>
+                  <ul class="dropdown">
+                     <li class="dropdown-item">Київ</li>
+                     <li class="dropdown-item">Дніпро</li>
+                     <li class="dropdown-item">Харків</li>
+                     <li class="dropdown-item">Львів</li>
+                  </ul>
+               </div>
                <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
             </div>
             <div class="field chapter__field grid-field" tabindex="-1">
@@ -54,7 +56,14 @@
 <!--                     min="1900-12-31" name="return_date">-->
 <!--               </div>-->
 <!--            </div>-->
-
+            <!--<div class="field chapter__field grid-field" tabindex="-1">
+               <p class="field-title">Кількість пасажирів (макс. 10)</p>
+               <div class="chapter__field__input-with-icon">
+                  <input type="text" class="chapter__input input__container"  id="amount-of-passengers" min="1" max="10"
+                     value="1" name="amount_of_passengers">
+               </div>
+               <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
+            </div> -->
          </div>
       </div>
 
@@ -78,15 +87,15 @@
                </div>
             </div>
             <div class="field chapter__field grid-field" tabindex="-1">
-               <p class="field-title">{{ form.departure_time.label }}</p>
+               <p class="field-title">Рейс відправлення</p>
                <div class="chapter__input wrapper-dropdown input__container">
                   <input type="text" class="hidden" id="flight-departure" name="flight_departure">
                   <span class="selected-display">Не обрано</span>
                   <i class="ri-arrow-down-s-fill arrow"></i>
                   <ul class="dropdown">
-                     {% for time in form.departure_time.field.queryset %}
-                     <li class="dropdown-item" data-value="{{ time.departure_time }}">{{ time.departure_time }}</li>
-                     {% endfor %}
+                     <li class="dropdown-item">18:00</li>
+                     <li class="dropdown-item">19:00</li>
+                     <li class="dropdown-item">20:00</li>
                   </ul>
                </div>
             </div>
@@ -132,14 +141,14 @@
                 <div class="log-form__input-with-icon">
                     <input type="date" class="chapter__input input__container input-date input-birthday"
                            id="date-of-birth" name="date_of_birth"
-                           value="">
+                           value="{{ request.user.date_of_birth }}">
                 </div>
                 <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
             </div>
 
             <div class="field chapter__field grid-field" tabindex="-1">
                 <p class="field-title">Тел. номер*</p>
-                <input type="tel" class="chapter__input input__container" placeholder="+380 68 345 67 89"
+                <input type="tel" class="chapter__input input__container" placeholder="+380 95 159 45 68"
                        pattern="(\+380|0)[0-9]{9}" name="phone_number">
                 <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
             </div>

@@ -39,7 +39,11 @@ def booking_train(request):
         form = BookingForm(request.POST)
         if form.is_valid():
             ticket = form.save(commit=False)
-            ticket.email = request.user.email
+
+            user = NewUser.objects.get(email=request.user.email)
+
+            ticket.email = user
+
             ticket.save()
             print("Success")
             send_booking_email(ticket)
@@ -82,21 +86,21 @@ def send_booking_email(ticket):
     send_mail(subject, '', email_from, recipient_list, html_message=email_html_message)
 
 
-# @login_required(login_url='login_view')
-# def booking_page(request):
-#     if request.method == "POST":
-#         form = BookingForm(request.POST)
-#         if form.is_valid():
-#             ticket = form.save(commit=False)
-#             ticket.email = request.user
-#             ticket.save()
-#
-#             send_booking_email(ticket)
-#
-#             return redirect('index')
-#     else:
-#         form = BookingForm()
-#     return render(request, 'booking.html', {'form': form})
+@login_required(login_url='login_view')
+def booking_page(request):
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.email = request.user
+            ticket.save()
+
+            send_booking_email(ticket)
+
+            return redirect('index')
+    else:
+        form = BookingForm()
+    return render(request, 'booking.html', {'form': form})
 
 
 @login_required(login_url='login_view')
