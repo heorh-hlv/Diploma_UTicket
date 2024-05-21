@@ -22,7 +22,14 @@
 
 /*   --clr-purple: #9B59B6;
    --clr-purple-hover: #8E49A4;
-   --clr-purple-active: #7D3B8E;*/
+   --clr-purple-active: #7D3B8E;
+   */
+
+    --clr-yellow: #FFC107; /* Основной желтый цвет */
+    --clr-yellow-hover: #FFB300; /* Цвет при наведении */
+    --clr-yellow-active: #FFA000; /* Цвет при активном состоянии */
+
+
 
    --clr-text-white: #fff;
    --clr-text-black: #000;
@@ -271,7 +278,7 @@ button {
    background-color: var(--clr-blue-active);
 }
 
-/*.button-purple {
+.button-purple {
    background-color: var(--clr-purple);
 }
 .button-purple:hover {
@@ -279,7 +286,17 @@ button {
 }
 .button-purple:active {
    background-color: var(--clr-purple-active);
-}*/
+}
+
+.button-yellow {
+   background-color: var(--clr-yellow);
+}
+.button-yellow:hover {
+   background-color: var(--clr-yellow-hover);
+}
+.button-yellow:active {
+   background-color: var(--clr-yellow-active);
+}
 
 .hidden {
    display: none;
@@ -481,6 +498,22 @@ button {
    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .25);
 }
 
+.card__buttons {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    /*column-gap: 0px;*/
+}
+
+.card__buttons a:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.card__buttons a:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .home__icon {
    position: relative;
    transform: translateY(15%);
@@ -521,7 +554,11 @@ button {
 }
 
 .home__button.button-purple:hover {
-   box-shadow: 0 2px 12px 0 rgb(128,0,128);
+   box-shadow: 0 2px 12px 0 rgb(255,255,51);
+}
+
+.home__button.button-yellow:hover {
+   box-shadow: 0 2px 12px 0 rgb(255,255,51);
 }
 
 /* =================  FOOTER  ============== */

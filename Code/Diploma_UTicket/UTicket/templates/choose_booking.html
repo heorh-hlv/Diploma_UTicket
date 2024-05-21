@@ -10,16 +10,21 @@
                <div class="home__cards grid grid-template-columns-2">
                   <div class="home__card flex">
                      <i class="ri-train-line home__icon"></i>
-                     <a href="{% url 'booking_train' %}" class="home__button button-fill button-green">Поїзд</a>
+                     <div class="card__buttons flex">
+                        <a href="{% url 'booking' transport='train' travel_type='oneway' %}" class="home__button button-fill button-blue">Поезд в одну сторону</a>
+                        <a href="{% url 'booking' transport='train' travel_type='roundtrip' %}" class="home__button button-fill button-yellow">Поезд с возвратом</a>
+                     </div>
                   </div>
                   <div class="home__card flex">
                      <i class="ri-plane-line home__icon"></i>
-                     <a href="" class="home__button button-fill button-blue">Літак</a>
+                     <div class="card__buttons flex">
+                        <a href="{% url 'booking' transport='plane' travel_type='oneway' %}" class="home__button button-fill button-blue">Самолёт в одну сторону</a>
+                        <a href="{% url 'booking' transport='plane' travel_type='roundtrip' %}" class="home__button button-fill button-yellow">Самолёт с возвратом</a>
+                     </div>
                   </div>
                </div>
             </div>
          </section>
       </div>
    </main>
-
 {% endblock %}

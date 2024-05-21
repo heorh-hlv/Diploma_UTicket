@@ -5,9 +5,9 @@
    {% load static %}
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="static/css/styles.css">
+   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-   <link rel="shortcut icon" href="static/imgs/favicon.ico" type="image/x-icon">
+   <link rel="shortcut icon" href="{% static 'imgs/favicon.ico' %}" type="image/x-icon">
    <title>{% block title %}UTicket - Головна{% endblock %}</title>
 </head>
 
@@ -17,7 +17,7 @@
       <div class="header__container flex">
          <div class="header__logo">
             <a href="{% url 'index' %}">
-               <img src="static/imgs/logo.svg" alt="">
+               <img src="{% static 'imgs/logo.svg' %}" alt="">
             </a>
          </div>
          <nav class="header__menu">
@@ -98,7 +98,7 @@
    </footer>
 
    <!-- scripts -->
-   <script src="static/js/main.js"></script>
+   <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>

@@ -57,21 +57,28 @@ def booking_train(request):
     return render(request, 'booking_train.html', {'form': form})
 
 
-# @login_required(login_url='login_view')
-# def booking_plane(request):
-#     if request.method == "POST":
-#         form = BookingForm(request.POST)
-#         if form.is_valid():
-#             ticket = form.save(commit=False)
-#             ticket.email = request.user
-#             ticket.save()
-#
-#             send_booking_email(ticket)
-#
-#             return redirect('index')
-#     else:
-#         form = BookingForm()
-#     return render(request, 'booking_plane.html', {'form': form})
+@login_required(login_url='login_view')
+def booking_plane(request):
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+
+            user = NewUser.objects.get(email=request.user.email)
+
+            ticket.email = user
+
+            ticket.save()
+            print("Success")
+            send_booking_email(ticket)
+
+            return redirect('index')
+        else:
+            print("Form is not valid")
+            print(form.errors)
+    else:
+        form = BookingForm()
+    return render(request, 'booking_plane.html', {'form': form})
 
 
 def send_booking_email(ticket):
@@ -87,20 +94,32 @@ def send_booking_email(ticket):
 
 
 @login_required(login_url='login_view')
-def booking_page(request):
+def booking(request, transport, travel_type):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
             ticket = form.save(commit=False)
-            ticket.email = request.user
+            user = NewUser.objects.get(email=request.user.email)
+            ticket.email = user
             ticket.save()
-
+            print("Success")
             send_booking_email(ticket)
-
             return redirect('index')
+        else:
+            print("Form is not valid")
+            print(form.errors)
     else:
         form = BookingForm()
-    return render(request, 'booking.html', {'form': form})
+
+    template_name = 'booking_plane.html'  # По умолчанию используется шаблон для самолета
+
+    if transport == 'train':
+        template_name = 'booking_train.html'
+
+    if travel_type == 'roundtrip':
+        template_name = template_name.replace('.html', '_roundtrip.html')
+
+    return render(request, template_name, {'form': form})
 
 
 @login_required(login_url='login_view')

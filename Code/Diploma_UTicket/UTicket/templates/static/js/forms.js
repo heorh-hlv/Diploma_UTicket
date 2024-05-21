@@ -160,21 +160,57 @@ if (dropdownDepartureCity && dropdownDestinationCity) {
    }
 }
 
-//? validate dates
+////? validate dates
+const returnDateInput = document.getElementById('return_date')
 const departureDateInput = document.getElementById('departure_date')
+if (returnDateInput) {
+    if (departureDateInput) {
+        departureDateInput.value = '';
+        returnDateInput.value = '';
+        var chosenDepartureDate = '';
 
+        //? disable returnDateInput  before departure date is chosen
+        returnDateInput.classList.add('disable');
 
-if (departureDateInput ) {
-   departureDateInput.value = '';
-   var chosenDepartureDate = '';
+        //? set the minimum departure date to current date
+        departureDateInput.min = new Date().toISOString().split('T')[0];
+        departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
 
-   //? set the minimum departure date to current date
-   departureDateInput.min = new Date().toISOString().split('T')[0];
-   departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
+        departureDateInput.addEventListener('change', () => {
+          returnDateInput.classList.remove('disable');
+          returnDateInput.value = '';
+          returnDateInput.min = departureDateInput.value;
+          returnDateInput.max = getDateAfterNYearsFromDate(new Date(departureDateInput.value), 1);;
+        })
+    }
 
 }
+else {
+    if (departureDateInput ) {
+        departureDateInput.value = '';
+        var chosenDepartureDate = '';
 
-////? validate dates2
+        //? set the minimum departure date to current date
+        departureDateInput.min = new Date().toISOString().split('T')[0];
+        departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
+    }
+}
+
+
+//const departureDateInput = document.getElementById('departure_date')
+//
+//
+//if (departureDateInput ) {
+//   departureDateInput.value = '';
+//   var chosenDepartureDate = '';
+//
+//   //? set the minimum departure date to current date
+//   departureDateInput.min = new Date().toISOString().split('T')[0];
+//   departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
+//
+//}
+
+////? validate dates
 //const departureDateInput = document.getElementById('departure_date')
 //const returnDateInput = document.getElementById('return_date')
 //if (departureDateInput && returnDateInput) {
@@ -182,7 +218,7 @@ if (departureDateInput ) {
 //   returnDateInput.value = '';
 //   var chosenDepartureDate = '';
 //
-//   ? disable returnDateInput  before departure date is chosen
+//   //? disable returnDateInput  before departure date is chosen
 //   returnDateInput.classList.add('disable');
 //
 //   //? set the minimum departure date to current date
