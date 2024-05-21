@@ -41,7 +41,7 @@ class Tickets(models.Model):
     city_destination = models.TextField(max_length=40)
     departure_date = models.DateField()
 
-    # return_date = models.DateField()
+    return_date = models.DateField(blank=True)
     # amount_of_passengers = models.IntegerField()
 
     # Travel settings

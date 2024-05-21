@@ -40,6 +40,12 @@
                <td class="table-cell" role="cell">Дата вильоту</td>
                <td class="table-cell" role="cell">{{ ticket.departure_date }}</td>
             </tr>
+            {% if ticket.return_date %}
+            <tr class="table-row" role="row">
+               <td class="table-cell" role="cell">Дата повернення</td>
+               <td class="table-cell" role="cell">{{ ticket.return_date }}</td>
+            </tr>
+            {% endif %}
             <tr class="table-row" role="row">
                <td class="table-cell" role="cell">Місце вильоту</td>
                <td class="table-cell" role="cell">{{ ticket.city_of_departure }}</td>
