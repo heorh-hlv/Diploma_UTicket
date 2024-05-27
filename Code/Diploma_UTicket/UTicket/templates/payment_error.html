@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="payment-error section">
+    <h1>Payment Failed</h1>
+    <p>There was an error processing your payment for ticket {{ payment.ticket.ticket_number }}.</p>
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+    <a href="{% url 'index' %}">Try Again</a>
+</section>
+{% endblock %}

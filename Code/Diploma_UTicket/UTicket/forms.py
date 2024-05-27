@@ -1,5 +1,17 @@
 from django import forms
 from .models import Tickets
+from .models import Payment
+
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['amount', 'currency', 'description']
+
+    def __init__(self, *args, **kwargs):
+        super(PaymentForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['readonly'] = 'readonly'
 
 
 class BookingForm(forms.ModelForm):
