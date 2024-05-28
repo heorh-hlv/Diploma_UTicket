@@ -10,17 +10,17 @@
             <h1 class="chapter__title">Payment for ticket {{ ticket.ticket_number }}</h1>
             <div class="chapter__fields grid grid-template-columns-4">
                 <div class="field chapter__field grid-field" tabindex="-1">
-                    <p class="field-title">{{ form.amount.label_tag }}</p>
-                    <p class="field-value">{{ form.amount.value }}</p>
-                    <input type="hidden" name="amount" value="{{ form.amount.value }}">
+                    <p class="field-title">Ціна</p>
+                    <p class="field-value">{{ form.price.value }}</p>
+                    <input type="hidden" name="price" value="{{ form.price.value }}">
                 </div>
                 <div class="field chapter__field grid-field" tabindex="-1">
-                    <p class="field-title">{{ form.currency.label_tag }}</p>
+                    <p class="field-title">Валюта</p>
                     <p class="field-value">{{ form.currency.value }}</p>
                     <input type="hidden" name="currency" value="{{ form.currency.value }}">
                 </div>
                 <div class="field chapter__field grid-field" tabindex="-1">
-                    <p class="field-title">{{ form.description.label_tag }}</p>
+                    <p class="field-title">Опис</p>
                     <p class="field-value">{{ form.description.value }}</p>
                     <input type="hidden" name="description" value="{{ form.description.value }}">
                 </div>

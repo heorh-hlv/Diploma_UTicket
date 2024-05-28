@@ -6,7 +6,7 @@ from .models import Payment
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ['amount', 'currency', 'description']
+        fields = ['price', 'currency', 'description']
 
     def __init__(self, *args, **kwargs):
         super(PaymentForm, self).__init__(*args, **kwargs)

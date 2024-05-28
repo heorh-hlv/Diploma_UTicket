@@ -211,7 +211,7 @@ def process_payment(request, ticket_id):
             print(form.errors)
     else:
         form = PaymentForm(initial={
-            'amount': ticket.price,
+            'price': ticket.price,
             'currency': 'UAH',
             'description': f'Оплата для білету {ticket.ticket_number}',
         })
