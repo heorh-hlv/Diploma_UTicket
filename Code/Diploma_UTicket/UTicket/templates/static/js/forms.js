@@ -101,7 +101,7 @@ function validateUnfilledForm(formFields) {
       })
    })
 }
-
+if (form) {
 form.addEventListener('submit', (e) => {
    fields.forEach(field => {
       if (!field.querySelector('.error')) return
@@ -130,6 +130,9 @@ form.addEventListener('submit', (e) => {
       }
    }
 })
+}
+
+
 
 //? validate cities
 const dropdownDepartureCity = document.querySelector('input#city-of-departure') ? document.querySelector('input#city-of-departure').closest('.wrapper-dropdown') : null;
@@ -197,42 +200,6 @@ else {
 }
 
 
-//const departureDateInput = document.getElementById('departure_date')
-//
-//
-//if (departureDateInput ) {
-//   departureDateInput.value = '';
-//   var chosenDepartureDate = '';
-//
-//   //? set the minimum departure date to current date
-//   departureDateInput.min = new Date().toISOString().split('T')[0];
-//   departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
-//
-//}
-
-////? validate dates
-//const departureDateInput = document.getElementById('departure_date')
-//const returnDateInput = document.getElementById('return_date')
-//if (departureDateInput && returnDateInput) {
-//   departureDateInput.value = '';
-//   returnDateInput.value = '';
-//   var chosenDepartureDate = '';
-//
-//   //? disable returnDateInput  before departure date is chosen
-//   returnDateInput.classList.add('disable');
-//
-//   //? set the minimum departure date to current date
-//   departureDateInput.min = new Date().toISOString().split('T')[0];
-//   departureDateInput.max = getDateAfterNYearsFromDate(new Date(), 1);
-//
-//   departureDateInput.addEventListener('change', () => {
-//      returnDateInput.classList.remove('disable');
-//      returnDateInput.value = '';
-//      returnDateInput.min = departureDateInput.value;
-//      returnDateInput.max = getDateAfterNYearsFromDate(new Date(departureDateInput.value), 1);;
-//   })
-//}
-
 function getDateAfterNYearsFromDate(inputDate, n) {
    if (typeof n !== 'number' || n < 0) {
       throw new Error('Invalid input for the number of years. Please provide a positive number of years.');
@@ -257,35 +224,6 @@ function getDateAfterNYearsFromDate(inputDate, n) {
    return formattedDate;
 }
 
-////? validate the amout of passengers input
-//const passengersAmountInput = document.getElementById('amount-of-passengers') ? document.getElementById('amount-of-passengers') : null;
-//if (passengersAmountInput) {
-//   passengersAmountInput.addEventListener('input', (e) => {
-//      const inputValue = e.target.value;
-//
-//      //? use a regular expression to check if the input contains anything except numbers
-//      const regex = /[^0-9]/g;
-//      const containsNonNumericCharacters = regex.test(inputValue);
-//      const fieldError = e.target.parentElement.parentElement.querySelector('#form-field-error')
-//      if (containsNonNumericCharacters) {
-//         fieldError.innerText = 'Невалідний формат.';
-//         fieldError.classList.remove('hidden')
-//         fieldError.classList.add('show')
-//      } else if (inputValue > 10) {
-//         fieldError.innerText = 'Не більше 10 пасажирів.';
-//         fieldError.classList.remove('hidden')
-//         fieldError.classList.add('show')
-//      } else if (inputValue < 1) {
-//         fieldError.innerText = 'Не менше 1 пасажира.';
-//         fieldError.classList.remove('hidden')
-//         fieldError.classList.add('show')
-//      } else {
-//         fieldError.innerText = 'Це поле має бути заповнене.';
-//         fieldError.classList.add('hidden')
-//         fieldError.classList.remove('show')
-//      }
-//   })
-//}
 
 //? validate ticket id for booking cancelling
 const ticketIdRegex = /^.{10}$/;
@@ -304,6 +242,84 @@ if (ticketIdInput) {
          fieldError.classList.remove('show')
       }
    })
+}
+
+
+
+// Formatting and validation for card number input
+const cardNumberInput = document.querySelector('#id_card_number');
+console.log(cardNumberInput)
+
+if (cardNumberInput) {
+    cardNumberInput.addEventListener('input', () => {
+        let input = cardNumberInput.value.replace(/\D/g, '').substring(0, 16); // Keep only digits, max length 16
+        let formattedInput = '';
+        for (let i = 0; i < input.length; i++) {
+            if (i > 0 && i % 4 === 0) {
+                formattedInput += ' ';
+            }
+            formattedInput += input[i];
+        }
+        cardNumberInput.value = formattedInput;
+    });
+
+    cardNumberInput.addEventListener('blur', () => {
+        const fieldError = cardNumberInput.parentElement.querySelector('.error');
+        if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumberInput.value)) {
+            fieldError.classList.remove('hidden');
+            fieldError.classList.add('show');
+            console.log("Card number validation failed");
+        } else {
+            fieldError.classList.add('hidden');
+            fieldError.classList.remove('show');
+        }
+    });
+}
+
+// Validation for expiry date input
+const cardExpiryInput = document.getElementById('id_card_expiry');
+if (cardExpiryInput) {
+    cardExpiryInput.addEventListener('input', () => {
+        let input = cardExpiryInput.value.replace(/\D/g, '').substring(0, 4); // Keep only digits, max length 4
+        let formattedInput = '';
+        if (input.length >= 2) {
+            formattedInput = input.substring(0, 2) + '/' + input.substring(2, 4);
+        } else {
+            formattedInput = input;
+        }
+        cardExpiryInput.value = formattedInput;
+    });
+
+    cardExpiryInput.addEventListener('blur', () => {
+        const fieldError = cardExpiryInput.parentElement.querySelector('.error');
+        if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardExpiryInput.value)) {
+            fieldError.classList.remove('hidden');
+            fieldError.classList.add('show');
+        } else {
+            fieldError.classList.add('hidden');
+            fieldError.classList.remove('show');
+        }
+    });
+}
+
+// Validation for CVV input
+const cardCvvInput = document.getElementById('id_card_cvv');
+if (cardCvvInput) {
+    cardCvvInput.addEventListener('input', () => {
+        console.log("CVV input event triggered");
+        cardCvvInput.value = cardCvvInput.value.replace(/\D/g, '').substring(0, 3); // Keep only digits, max length 3
+    });
+
+    cardCvvInput.addEventListener('blur', () => {
+        const fieldError = cardCvvInput.parentElement.querySelector('.error');
+        if (!/^\d{3}$/.test(cardCvvInput.value)) {
+            fieldError.classList.remove('hidden');
+            fieldError.classList.add('show');
+        } else {
+            fieldError.classList.add('hidden');
+            fieldError.classList.remove('show');
+        }
+    });
 }
 
 
@@ -340,3 +356,4 @@ charsCounters.forEach(charsCounter => {
       charsCounter.textContent = inputChars + ' / ' + maxChars;
    })
 })
+

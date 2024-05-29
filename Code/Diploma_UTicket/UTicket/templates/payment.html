@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<section class="booking section">
+<section class="payment section">
     <form method="post" action="">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -31,19 +30,19 @@
             <div class="chapter__fields grid grid-template-columns-4">
                 <div class="field chapter__field grid-field" tabindex="-1">
                     <p class="field__title"><label for="id_card_number">Card Number</label></p>
-                    <input type="text" class="chapter__input input__container" placeholder="Номер картки" name="card_number" id="id_card_number">
+                    <input type="text" class="chapter__input input__container" placeholder="Номер картки" name="id_card_number" id="id_card_number">
                     <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                 </div>
 
                 <div class="field chapter__field grid-field" tabindex="-1">
                     <p class="field__title"><label for="id_card_expiry">Expiry Date (MM/YY)</label></p>
-                    <input type="text" class="chapter__input input__container" placeholder="MM/YY" name="card_expiry" id="id_card_expiry">
+                    <input type="text" class="chapter__input input__container" placeholder="MM/YY" name="id_card_expiry" id="id_card_expiry">
                     <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                 </div>
 
                 <div class="field chapter__field grid-field" tabindex="-1">
                     <p class="field__title"><label for="id_card_cvv">CVV</label></p>
-                    <input type="text" class="chapter__input input__container" placeholder="CVV" name="card_cvv" id="id_card_cvv">
+                    <input type="text" class="chapter__input input__container" placeholder="CVV" name="id_card_cvv" id="id_card_cvv">
                     <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                 </div>
             </div>
@@ -51,6 +50,5 @@
         <button class="form__submit button-fill button-green input__container" type="submit">Забронювати</button>
     </form>
 </section>
-
 <script src="{% static 'js/forms.js' %}"></script>
 {% endblock %}

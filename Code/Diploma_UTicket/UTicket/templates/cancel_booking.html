@@ -1,87 +1,21 @@
 ﻿{% extends 'base.html' %}
 {% block content %}
-
+{% load static %}
 <!-- ============  CANCEL BOOKING  ============== -->
 <section class="cancel-booking section">
-   <form action="" class="cancel-booking form">
+   <form class="cancel-booking form" method="POST">
       {% csrf_token %}
       <div class="form-chapter form-chapter-small">
          <div class="chapter__fields grid grid-template-columns-4">
             <div class="field chapter__field grid-field" tabindex="-1">
                <p class="field__title">ID квитка*</p>
-               <input type="text" id="ticket-id" class="chapter__input input__container " placeholder="111111111">
+               <input type="text" id="ticket_number" name="ticket_number" class="chapter__input input__container"
+                      placeholder="111111111">
                <p class="chapter__field-error error hidden" id="form-field-error">Це поле має бути заповнене.</p>
             </div>
          </div>
       </div>
-      <div class="form-chapter">
-         <h1 class="chapter__subtitle cancel-reason-title">
-            Причина скасування
-         </h1>
-         <div class="chapter__fields grid grid-template-columns-4">
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align">
-                  <input type="radio" class="input-radio" id="cancel-reason-1" name="cancel-reason">
-                  <label for="cancel-reason-1" class="radio__lablel">Зміни в планах подорожі</label>
-                  <div class="input-check"></div>
-               </div>
-            </div>
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align">
-                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-2">
-                  <label for="cancel-reason-2" class="radio__lablel">Погодні умови</label>
-                  <div class="input-check"></div>
-               </div>
 
-            </div>
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align">
-                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-3">
-                  <label for="cancel-reason-3" class="radio__lablel">Проблеми зі здоров’ям</label>
-                  <div class="input-check"></div>
-               </div>
-
-            </div>
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align">
-                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-4">
-                  <label for="cancel-reason-4" class="radio__lablel">Справи стосовно праці</label>
-                  <div class="input-check"></div>
-               </div>
-
-            </div>
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align"><input name="cancel-reason" type="radio" class="input-radio"
-                     id="cancel-reason-5">
-                  <label for="cancel-reason-5" class="radio__lablel">Сімейні або особисті надзвичайна
-                     ситуація</label>
-                  <div class="input-check"></div>
-               </div>
-
-            </div>
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align">
-                  <input name="cancel-reason" type="radio" class="input-radio" id="cancel-reason-6">
-                  <label for="cancel-reason-6" class="radio__lablel">Проблеми з візою</label>
-                  <div class="input-check"></div>
-               </div>
-
-            </div>
-            <div class="field chapter__field grid-field" tabindex="-1">
-               <div class="radio__button-align">
-                  <input name="cancel-reason" type="radio" class="input-radio" id="other-reasons-cancelling-trigger">
-                  <label for="other-reasons-cancelling-trigger" class="radio__lablel">Інше</label>
-                  <div class="input-check"></div>
-               </div>
-
-            </div>
-         </div>
-         <div class="full-size-field hidden" id="other-reasons-cancelling-textarea" tabindex="-1">
-            <textarea class="cutsom-textarea input__container counted-chars-area" placeholder="Маю проблеми з..."
-               name="" id="" maxlength="500"></textarea>
-            <p class="chars-counter">0 / 500</p>
-         </div>
-      </div>
       <div class="form__submit">
          <button class="button-fill button-red input__container" type="submit">
             Скасувати
@@ -93,5 +27,5 @@
 
 
 <!-- scripts -->
-<script src="static/js/forms.js"></script>
+<script src="{% static 'js/forms.js' %}"></script>
 {% endblock %}

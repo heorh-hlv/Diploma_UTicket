@@ -226,6 +226,15 @@ def payment_done(request, token):
 
 @login_required(login_url='login_view')
 def cancel_page(request):
+    if request.method == "POST":
+        ticket_number = request.POST.get("ticket_number")
+        if ticket_number:
+            tickets = Tickets.objects.filter(ticket_number=ticket_number)
+            if tickets.exists():
+                tickets.delete()
+                return render(request, 'index.html')
+            else:
+                return render(request, "cancel_booking.html", {"error": "Білет не знайдено"})
     return render(request, 'cancel_booking.html')
 
 
