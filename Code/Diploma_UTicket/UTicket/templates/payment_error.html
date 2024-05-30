@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="payment-error section">
-    <h1>Payment Failed</h1>
-    <p>There was an error processing your payment for ticket {{ payment.ticket.ticket_number }}.</p>
+    <h1>Сталася помилка</h1>
+    <p>Під час лбробки платежу {{ payment.ticket.ticket_number }} сталася помилка.</p>
     {% if error %}
         <p>Error: {{ error }}</p>
     {% endif %}

@@ -135,33 +135,33 @@ def calculate_price(city_departure, city_destination, transport_class):
     # City price
     if city_departure in ukraine:
         if city_destination in ukraine:
-            price += 20
+            price += 2000
         elif city_destination in east_europe:
-            price += 30
+            price += 3000
         elif city_destination in west_europe:
-            price += 40
+            price += 4000
     elif city_departure in east_europe:
         if city_destination in ukraine:
-            price += 25
+            price += 2500
         elif city_destination in east_europe:
-            price += 20
+            price += 2000
         elif city_destination in west_europe:
-            price += 35
+            price += 3500
     elif city_departure in west_europe:
         if city_destination in ukraine:
-            price += 40
+            price += 4000
         elif city_destination in east_europe:
-            price += 35
+            price += 3500
         elif city_destination in west_europe:
-            price += 20
+            price += 2000
 
     # Transport class price
     if transport_class == 'Сидячий першого класу':
-        price += 15
+        price += 500
     elif transport_class == 'Бізнес':
-        price += 15
+        price += 500
     elif transport_class == 'Перший':
-        price += 25
+        price += 1000
 
     return price
 
@@ -247,7 +247,7 @@ def check_page(request):
             if tickets.exists():
                 for ticket in tickets:
                     payment = Payment.objects.filter(ticket=ticket).first()
-                    ticket.payment_status = payment.status if payment else "No Payment Info"
+                    ticket.payment_status = payment.status if payment else "Немає інформації"
 
                 return render(request, "check_booking.html", {"tickets": tickets})
             else:

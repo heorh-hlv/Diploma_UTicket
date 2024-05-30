@@ -6,7 +6,7 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         <div class="form-chapter">
-            <h1 class="chapter__title">Payment for ticket {{ ticket.ticket_number }}</h1>
+            <h1 class="chapter__title">Оплата для білету {{ ticket.ticket_number }}</h1>
             <div class="chapter__fields grid grid-template-columns-4">
                 <div class="field chapter__field grid-field" tabindex="-1">
                     <p class="field-title">Ціна</p>
@@ -29,13 +29,13 @@
             <h2 class="chapter__title">Card Information</h2>
             <div class="chapter__fields grid grid-template-columns-4">
                 <div class="field chapter__field grid-field" tabindex="-1">
-                    <p class="field__title"><label for="id_card_number">Card Number</label></p>
+                    <p class="field__title"><label for="id_card_number">Номер картки</label></p>
                     <input type="text" class="chapter__input input__container" placeholder="Номер картки" name="id_card_number" id="id_card_number">
                     <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                 </div>
 
                 <div class="field chapter__field grid-field" tabindex="-1">
-                    <p class="field__title"><label for="id_card_expiry">Expiry Date (MM/YY)</label></p>
+                    <p class="field__title"><label for="id_card_expiry">Дійсна до (MM/YY)</label></p>
                     <input type="text" class="chapter__input input__container" placeholder="MM/YY" name="id_card_expiry" id="id_card_expiry">
                     <p class="chapter__field-error error hidden">Це поле має бути заповнене.</p>
                 </div>

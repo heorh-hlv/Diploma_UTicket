@@ -1,5 +1,6 @@
 ﻿{% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <div class="pop-up__log-form" id="signup-form">
 
@@ -38,12 +39,12 @@
          </div>
       </form>
       <p class="log-form__subtext">
-         Вже маєте обліковий запис? <span onclick="openPopupLogin()" class="subtext__link" id="to-login">Увіти</span>
+         Вже маєте обліковий запис? <a href="http://127.0.0.1:8000/login" style="cursor: pointer;" class="subtext__link" id="to-login">Увіти</a>
       </p>
    </div>
 </div>
 
 <!-- scripts -->
-<script src="static/js/forms.js"></script>
+<script src="{% static 'js/forms.js' %}"></script>
 
 {% endblock %}

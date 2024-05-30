@@ -1,12 +1,7 @@
 ﻿{% extends 'base.html' %}
 {% block content %}
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+
+
 <div class="pop-up__log-form" id="login-form">
 
     <div class="log-form__container">
@@ -28,6 +23,13 @@
                         <i class="ri-eye-off-fill eye-closed"></i>
                     </span>
                 </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
             <div class="field log-form__field">
                 <button class="log-form__submit button-fill button-blue" type="submit">
@@ -36,7 +38,7 @@
             </div>
         </form>
         <p class="log-form__subtext">
-            Ще не маєте облікового запису? <span onclick="openPopupSignup()" style="cursor: pointer;" class="subtext__link" id="to-login">Зареєструватися</span>
+            Ще не маєте облікового запису? <a href="http://127.0.0.1:8000/signup" style="cursor: pointer;" class="subtext__link" id="to-login">Зареєструватися</a>
         </p>
     </div>
 </div>

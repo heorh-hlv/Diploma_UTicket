@@ -772,6 +772,10 @@ button {
    width: 100%;
 }
 
+.messages {
+   color: var(--clr-red);
+}
+
 /* ============== BOOKING   ============== */
 
 .form-chapter {

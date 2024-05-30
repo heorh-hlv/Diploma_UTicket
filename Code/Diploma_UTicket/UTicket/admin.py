@@ -14,7 +14,7 @@ class PaymentAdmin(admin.ModelAdmin):
     # Выберите статусы для изменения
     def get_readonly_fields(self, request, obj=None):
         if obj and obj.status == 'confirmed':
-            return ['status']  # нельзя изменить статус если он 'confirmed'
+            return ['status']
         return []
 
 

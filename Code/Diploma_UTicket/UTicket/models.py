@@ -85,5 +85,5 @@ class Payment(models.Model):
     token = models.UUIDField(default=uuid4, editable=False, unique=True)
 
     def __str__(self):
-        return f"Payment {self.token} for ticket {self.ticket.id}"
+        return f"Payment {self.token} for ticket {self.ticket.email}"
 
