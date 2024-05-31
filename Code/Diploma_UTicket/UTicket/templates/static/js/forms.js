@@ -268,7 +268,6 @@ if (cardNumberInput) {
         if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumberInput.value)) {
             fieldError.classList.remove('hidden');
             fieldError.classList.add('show');
-            console.log("Card number validation failed");
         } else {
             fieldError.classList.add('hidden');
             fieldError.classList.remove('show');
@@ -291,18 +290,37 @@ if (cardExpiryInput) {
     });
 
     cardExpiryInput.addEventListener('blur', () => {
-        const fieldError = cardExpiryInput.parentElement.querySelector('.error');
-        if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardExpiryInput.value)) {
-            fieldError.classList.remove('hidden');
-            fieldError.classList.add('show');
-        } else {
-            fieldError.classList.add('hidden');
-            fieldError.classList.remove('show');
-        }
+        validateExpiryDate();
     });
 }
 
+function validateExpiryDate() {
+    const fieldError = cardExpiryInput.parentElement.querySelector('.error');
+    if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardExpiryInput.value)) {
+        fieldError.innerText = 'Невалідний формат.';
+        fieldError.classList.remove('hidden');
+        fieldError.classList.add('show');
+        return false;
+    } else {
+        fieldError.classList.add('hidden');
+        fieldError.classList.remove('show');
+        return true;
+    }
+}
+
+document.querySelector('form').addEventListener('submit', (event) => {
+    if (!validateExpiryDate()) {
+        event.preventDefault();
+    }
+});
+
+
 // Validation for CVV input
+document.querySelector('form').addEventListener('submit', (event) => {
+    if (!validateExpiryDate() || !validateCVV()) {
+        event.preventDefault();
+    }
+});
 const cardCvvInput = document.getElementById('id_card_cvv');
 if (cardCvvInput) {
     cardCvvInput.addEventListener('input', () => {
@@ -311,16 +329,26 @@ if (cardCvvInput) {
     });
 
     cardCvvInput.addEventListener('blur', () => {
-        const fieldError = cardCvvInput.parentElement.querySelector('.error');
-        if (!/^\d{3}$/.test(cardCvvInput.value)) {
-            fieldError.classList.remove('hidden');
-            fieldError.classList.add('show');
-        } else {
-            fieldError.classList.add('hidden');
-            fieldError.classList.remove('show');
-        }
+        validateCVV();
     });
 }
+
+function validateCVV() {
+    const cardCvvInput = document.getElementById('id_card_cvv');
+    const fieldError = cardCvvInput.parentElement.querySelector('.error');
+    if (!/^\d{3}$/.test(cardCvvInput.value)) {
+        fieldError.classList.remove('hidden');
+        fieldError.classList.add('show');
+        return false;
+    } else {
+        fieldError.classList.add('hidden');
+        fieldError.classList.remove('show');
+        return true;
+    }
+}
+
+
+
 
 
 

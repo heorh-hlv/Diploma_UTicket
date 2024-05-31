@@ -63,6 +63,8 @@ class Tickets(models.Model):
     # Payment
     price = models.CharField(max_length=10)
 
+    # Service
+    transport_type = models.CharField(max_length=5)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -79,7 +81,6 @@ class Payment(models.Model):
     ticket = models.ForeignKey(Tickets, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3, default='UAH')
-    #amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Оплата в процесі')
     token = models.UUIDField(default=uuid4, editable=False, unique=True)

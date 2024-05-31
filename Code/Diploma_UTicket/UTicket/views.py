@@ -175,8 +175,14 @@ def booking(request, transport, travel_type):
             user = NewUser.objects.get(email=request.user.email)
             ticket.email = user
             ticket.plane_place = choose_seat(ticket.plane_class, ticket.plane_place)
-            ticket.price = calculate_price(ticket.city_of_departure, ticket.city_destination,
-                                           ticket.plane_class)
+            ticket.price = calculate_price(ticket.city_of_departure, ticket.city_destination, ticket.plane_class)
+
+            # Set transport_type based on selected transport
+            if transport == 'plane':
+                ticket.transport_type = "Літак"
+            elif transport == 'train':
+                ticket.transport_type = "Поїзд"
+
             ticket.save()
             send_booking_email(ticket)
             return redirect('process_payment', ticket_id=ticket.id)
