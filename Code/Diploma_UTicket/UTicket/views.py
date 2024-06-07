@@ -7,7 +7,9 @@ from django.contrib.auth import logout
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import BookingForm, PaymentForm
+from django.db import IntegrityError
 from django.template.loader import render_to_string
+from django.urls import reverse
 import random
 
 # Create your views here.
@@ -225,7 +227,6 @@ def login_view(request):
 
 def signup(request):
     if request.method == "POST":
-
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get("email")
@@ -240,11 +241,13 @@ def signup(request):
         elif password is None:
             return HttpResponse("<h3>Введіть пароль</h3>")
         else:
-
-            user = NewUser.objects.create_user(first_name=first_name, last_name=last_name, email=email,
-                                               password=password)
-            login(request, user)
-            return redirect('index')
+            try:
+                user = NewUser.objects.create_user(first_name=first_name, last_name=last_name, email=email, password=password)
+                login(request, user)
+                return redirect(reverse('index'))
+            except IntegrityError:
+                messages.error(request, "Цей email вже зареєстровано.")
+                return render(request, 'signup.html')
 
     return render(request, 'signup.html')
 

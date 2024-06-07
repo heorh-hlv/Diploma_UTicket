@@ -3,45 +3,49 @@
 {% load static %}
 
 <div class="pop-up__log-form" id="signup-form">
-
-   <div class="log-form__container">
-
-      <h1 class="log-form__title">Зареєструватися</h1>
-
-      <form action="#" class="log-form__form flex" method="POST">
-         {% csrf_token %}
-         <div class="field log-form__field">
-            <p class="field-title">Ваш email</p>
-            <input type="email" class="log-form__input input__container" placeholder="Email" id="email" name="email" required>
-         </div>
-         <div class="field log-form__field">
-            <p class="field-title">Ваше ім’я</p>
-            <input type="text" class="log-form__input input__container" placeholder="Ім’я" id="first_name" name="first_name" required>
-         </div>
-         <div class="field log-form__field">
-            <p class="field-title">Ваше прізвище</p>
-            <input type="text" class="log-form__input input__container" placeholder="Прізвище" id="last_name" name="last_name" required>
-         </div>
-         <div class="field log-form__field">
-            <p class="field-title">Пароль</p>
-            <div class="log-form__input-with-icon">
-               <input type="password" class="log-form__input input__container input-password" id="input-password" placeholder="Створіть пароль" name="password" required>
-               <span class="input__icon" id="show-hide-password">
-                  <i class="ri-eye-fill eye-opened hidden"></i>
-                  <i class="ri-eye-off-fill eye-closed"></i>
-               </span>
+    <div class="log-form__container">
+        <h1 class="log-form__title">Зареєструватися</h1>
+        <form action="{% url 'signup' %}" class="log-form__form flex" method="POST">
+            {% csrf_token %}
+            <div class="field log-form__field">
+                <p class="field-title">Ваш email</p>
+                <input type="email" class="log-form__input input__container" placeholder="Email" id="email" name="email" required>
             </div>
-         </div>
-         <div class="field log-form__field">
-            <button class="log-form__submit button-fill button-blue" type="submit">
-               Продовжити
-            </button>
-         </div>
-      </form>
-      <p class="log-form__subtext">
-         Вже маєте обліковий запис? <a href="http://127.0.0.1:8000/login" style="cursor: pointer;" class="subtext__link" id="to-login">Увіти</a>
-      </p>
-   </div>
+           {% if messages %}
+             <ul class="messages">
+                 {% for message in messages %}
+                     <p>{{ message }}</p>
+                 {% endfor %}
+             </ul>
+           {% endif %}
+            <div class="field log-form__field">
+                <p class="field-title">Ваше ім’я</p>
+                <input type="text" class="log-form__input input__container" placeholder="Ім’я" id="first_name" name="first_name" required>
+            </div>
+            <div class="field log-form__field">
+                <p class="field-title">Ваше прізвище</p>
+                <input type="text" class="log-form__input input__container" placeholder="Прізвище" id="last_name" name="last_name" required>
+            </div>
+            <div class="field log-form__field">
+                <p class="field-title">Пароль</p>
+                <div class="log-form__input-with-icon">
+                    <input type="password" class="log-form__input input__container input-password" id="input-password" placeholder="Створіть пароль" name="password" required>
+                    <span class="input__icon" id="show-hide-password">
+                        <i class="ri-eye-fill eye-opened hidden"></i>
+                        <i class="ri-eye-off-fill eye-closed"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field log-form__field">
+                <button class="log-form__submit button-fill button-blue" type="submit">
+                    Продовжити
+                </button>
+            </div>
+        </form>
+        <p class="log-form__subtext">
+            Вже маєте обліковий запис? <a href="{% url 'login_view' %}" style="cursor: pointer;" class="subtext__link" id="to-login">Увіти</a>
+        </p>
+    </div>
 </div>
 
 <!-- scripts -->
