@@ -11,7 +11,6 @@ class PaymentAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     search_fields = ('ticket__id', 'token')
 
-    # Выберите статусы для изменения
     def get_readonly_fields(self, request, obj=None):
         if obj and obj.status == 'confirmed':
             return ['status']

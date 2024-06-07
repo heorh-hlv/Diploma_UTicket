@@ -41,11 +41,11 @@ class Tickets(models.Model):
     departure_date = models.DateField()
 
     return_date = models.DateField(blank=True, null=True)
-    # amount_of_passengers = models.IntegerField()
 
     # Travel settings
     plane_class = models.CharField(max_length=30)
     flight_departure = models.CharField(max_length=40)
+    flight_return = models.CharField(max_length=40)
     plane_place = models.CharField(max_length=30)
 
     # Passenger data

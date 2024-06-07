@@ -22,54 +22,6 @@ def choose_booking(request):
     return render(request, 'choose_booking.html')
 
 
-# @login_required(login_url='login_view')
-# def booking_train(request):
-#     if request.method == "POST":
-#         form = BookingForm(request.POST)
-#         if form.is_valid():
-#             ticket = form.save(commit=False)
-#
-#             user = NewUser.objects.get(email=request.user.email)
-#
-#             ticket.email = user
-#
-#             ticket.save()
-#             print("Success")
-#             send_booking_email(ticket)
-#
-#             return redirect('index')
-#         else:
-#             print("Form is not valid")
-#             print(form.errors)
-#     else:
-#         form = BookingForm()
-#     return render(request, 'booking_train.html', {'form': form})
-#
-#
-# @login_required(login_url='login_view')
-# def booking_plane(request):
-#     if request.method == "POST":
-#         form = BookingForm(request.POST)
-#         if form.is_valid():
-#             ticket = form.save(commit=False)
-#
-#             user = NewUser.objects.get(email=request.user.email)
-#
-#             ticket.email = user
-#
-#             ticket.save()
-#             print("Success")
-#             send_booking_email(ticket)
-#
-#             return redirect('index')
-#         else:
-#             print("Form is not valid")
-#             print(form.errors)
-#     else:
-#         form = BookingForm()
-#     return render(request, 'booking_plane.html', {'form': form})
-
-
 def send_booking_email(ticket):
     subject = 'Успішна покупка'
     email_template_name = 'email_confirmation.html'
@@ -101,12 +53,6 @@ def choose_seat(transport_class, transport_place):
         return f"Вагон №{car_number}, місце {seat_label}"
 
     else:
-        # AirbusA380:
-        #
-        # Общееколичество мест: 525
-        # Эконом - класс: 400 - 600мест
-        # Бизнес - класс: 50 - 100мест
-        # Первый класс: 10 - 20 мест
 
         if transport_class == 'Стандарт':
             seat_number = random.randint(1, 400)
@@ -184,7 +130,6 @@ def booking(request, transport, travel_type):
                 ticket.transport_type = "Поїзд"
 
             ticket.save()
-            send_booking_email(ticket)
             return redirect('process_payment', ticket_id=ticket.id)
         else:
             print("Form is not valid")
@@ -211,6 +156,7 @@ def process_payment(request, ticket_id):
             payment.ticket = ticket
             payment.price = ticket.price
             payment.save()
+            send_booking_email(ticket)
             return redirect('payment_done', token=payment.token)
         else:
             print("Form is not valid")
@@ -280,13 +226,11 @@ def login_view(request):
 def signup(request):
     if request.method == "POST":
 
-        # retrieve user input from the form
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        # validate input fields
         if first_name is None:
             return HttpResponse("<h3>Введіть ім'я</h3>")
         elif last_name is None:
@@ -297,17 +241,11 @@ def signup(request):
             return HttpResponse("<h3>Введіть пароль</h3>")
         else:
 
-            # Create a new user using the NewUser model
             user = NewUser.objects.create_user(first_name=first_name, last_name=last_name, email=email,
                                                password=password)
-
-            # Log in the user after successful registration
             login(request, user)
-
-            # Redirect to the index page
             return redirect('index')
 
-    # If the request method is not POST, render the signup.html template
     return render(request, 'signup.html')
 
 

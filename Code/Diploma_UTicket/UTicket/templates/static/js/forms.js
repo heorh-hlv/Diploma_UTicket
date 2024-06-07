@@ -22,6 +22,37 @@ inputsBirthday.forEach(inputBirthday => {
    inputBirthday.max = new Date().toISOString().split('T')[0];
 })
 
+// function to check if the user is 18 or older
+function isUserAtLeast18(dateOfBirth) {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    // If the birth month is after the current month, or it's the same month but the birth day is after the current day, subtract one year from age
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age >= 18;
+}
+
+// Set the maximum date for the date of birth input
+const dateOfBirthInput = document.getElementById('date-of-birth');
+if (dateOfBirthInput) {
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    dateOfBirthInput.max = maxDate.toISOString().split('T')[0];
+}
+
+// Add event listener to the form submission to validate the age
+document.querySelector('form').addEventListener('submit', function (event) {
+    const dateOfBirth = dateOfBirthInput.value;
+    if (!isUserAtLeast18(dateOfBirth)) {
+        event.preventDefault();
+        alert('You must be at least 18 years old.');
+    }
+});
 
 
 //todo DROPDOWN MENU
